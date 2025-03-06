@@ -2,9 +2,12 @@
 
 public class HardSkill : BaseEntity
 {
+    private HardSkill() { }
+
     public HardSkill(string name)
     {
         Name = name;
+        IsDeleted = false;
     }
 
     public string Name { get; private set; }

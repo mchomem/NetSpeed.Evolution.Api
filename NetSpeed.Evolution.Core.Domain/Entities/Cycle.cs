@@ -2,6 +2,8 @@
 
 public class Cycle : BaseEntity
 {
+    private Cycle() { }
+
     public Cycle(int year)
     {
         Year = year;

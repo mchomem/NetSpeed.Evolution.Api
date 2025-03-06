@@ -9,7 +9,7 @@ public class User : BaseEntity
         Name = name;
         Blocked = blocked;
     }
-    
+
     public string Name { get; private set; }
     public bool Blocked { get; private set; }
 

@@ -2,6 +2,8 @@
 
 public class EmployeeHardSkill
 {
+    private EmployeeHardSkill() { }
+
     public EmployeeHardSkill(long employeeId, long hardSkillId, HardSkillLevel level)
     {
         EmployeeId = employeeId;

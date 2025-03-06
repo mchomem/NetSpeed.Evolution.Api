@@ -2,6 +2,8 @@
 
 public class ActionPlain : BaseEntity
 {
+    private ActionPlain() { }
+
     public ActionPlain(long employeeId, string improvementPoint, string what, string who, string why, string where, string when, string how, string howMuch, string observation, DateTime createdAt)
     {
         EmployeeId = employeeId;
