@@ -1,7 +1,4 @@
-﻿using Microsoft.OpenApi.Models;
-using System.Reflection;
-
-namespace NetSpeed.Evolution.Infrastructure.IoC;
+﻿namespace NetSpeed.Evolution.Infrastructure.IoC;
 
 public static class DependenceInjectionApi
 {
@@ -29,21 +26,22 @@ public static class DependenceInjectionApi
     {
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
-        var linkedinProfile = "https://www.linkedin.com/in/misael-da-costa-homem-8b07a158/";
+        var linkedinProfile = "https://www.netspeed.com.br/";
 
         services.AddEndpointsApiExplorer();
-        services.AddSwaggerGen(options => {
+        services.AddSwaggerGen(options =>
+        {
             options.SwaggerDoc(
                 "v1"
                 , new OpenApiInfo
                 {
-                    Title = "HouseRentals.Api",
+                    Title = "NetSpeed.Evolution.Api",
                     Version = "v1",
-                    Description = "Web Api to control house rentals.",
+                    Description = "Web Api da aplicação NetSpeed Evolution",
                     Contact = new OpenApiContact
                     {
-                        Name = "Misael C. Homem",
-                        Email = "misael.homem@gmail.com",
+                        Name = "Netspeed",
+                        Email = "evolution@netspeed.com.br",
                         Url = new Uri(linkedinProfile)
                     },
                 });

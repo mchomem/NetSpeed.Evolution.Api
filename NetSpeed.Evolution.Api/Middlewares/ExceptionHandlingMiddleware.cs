@@ -1,6 +1,4 @@
-﻿
-
-namespace NetSpeed.Evolution.Api.Middlewares;
+﻿namespace NetSpeed.Evolution.Api.Middlewares;
 
 public class ExceptionHandlingMiddleware
 {
