@@ -6,4 +6,19 @@
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
 
+	<ItemGroup>
+	  <PackageReference Include="AutoMapper" Version="14.0.0" />
+	  <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.1" />
+		<PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="7.2.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="7.2.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="7.2.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="7.2.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\NetSpeed.Evolution.Core.Application\NetSpeed.Evolution.Core.Application.csproj" />
+	  <ProjectReference Include="..\NetSpeed.Evolution.Core.Domain\NetSpeed.Evolution.Core.Domain.csproj" />
+	  <ProjectReference Include="..\NetSpeed.Evolution.Infrastructure.Persistence\NetSpeed.Evolution.Infrastructure.Persistence.csproj" />
+	</ItemGroup>
+
 </Project>
