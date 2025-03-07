@@ -1,1 +1,11 @@
 ﻿global using Microsoft.AspNetCore.Mvc;
+global using NetSpeed.Evolution.Api.Middlewares;
+global using NetSpeed.Evolution.Api.Responses;
+global using NetSpeed.Evolution.Core.Application.DTOs;
+global using NetSpeed.Evolution.Core.Application.Filters;
+global using NetSpeed.Evolution.Core.Application.Interfaces;
+global using NetSpeed.Evolution.Core.Domain.Constants;
+global using NetSpeed.Evolution.Infrastructure.IoC;
+global using System.Net;
+global using System.Text.Json;
+global using System.Text.Json.Serialization;

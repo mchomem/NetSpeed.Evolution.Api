@@ -18,7 +18,7 @@ public class JobTitle : BaseEntity
         Name = name;
     }
 
-    public void Deleted()
+    public void Delete()
     {
         IsDeleted = true;
     }
