@@ -70,4 +70,16 @@ public class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity : 
         await _AppDbContext.SaveChangesAsync();
         return _AppDbContext.Entry(entity).Entity;
     }
+
+    public async Task<bool> CheckIfExists(Expression<Func<TEntity, bool>> filter)
+    {
+        IQueryable<TEntity> query = _DbSet
+            .AsQueryable()
+            .Where(filter)
+            .AsNoTracking();
+
+        var result = await query.AnyAsync();
+
+        return result;
+    }
 }

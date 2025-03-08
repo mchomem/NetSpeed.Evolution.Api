@@ -7,4 +7,5 @@ public interface IHardSkillService
     public Task<HardSkillDto> GetAsync(long id);
     public Task<IEnumerable<HardSkillDto>> GetAllAsync(HardSkillFilter filter, IEnumerable<string>? includes = null);
     public Task<HardSkillDto> UpdateAsync(long id, HardSkillUpdateDto entity);
+    public Task<bool> CheckIfExists(HardSkillFilter filter);
 }

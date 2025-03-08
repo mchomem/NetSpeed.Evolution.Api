@@ -7,4 +7,5 @@ public interface IJobTitleService
     public Task<JobTitleDto> GetAsync(long id);
     public Task<IEnumerable<JobTitleDto>> GetAllAsync(JobTitleFilter filter, IEnumerable<string>? includes = null);
     public Task<JobTitleDto> UpdateAsync(long id, JobTitleUpdateDto entity);
+    public Task<bool> CheckIfExists(JobTitleFilter filter);
 }

@@ -7,4 +7,5 @@ public interface IJobTitleRepository
     public Task<JobTitle> GetAsync(long id);
     public Task<IEnumerable<JobTitle>> GetAllAsync(Expression<Func<JobTitle, bool>> filter, IEnumerable<string>? includes = null);
     public Task<JobTitle> UpdateAsync(JobTitle entity);
+    public Task<bool> CheckIfExists(Expression<Func<JobTitle, bool>> filter);
 }

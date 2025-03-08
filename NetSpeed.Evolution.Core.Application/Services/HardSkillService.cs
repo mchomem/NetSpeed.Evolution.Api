@@ -13,6 +13,9 @@ public class HardSkillService : IHardSkillService
 
     public async Task<HardSkillDto> CreateAsync(HardSkillInsertDto entity)
     {
+        if (await CheckIfExists(new HardSkillFilter() { Name = entity.Name }))
+            throw new HardSkillAlreadyExistsException();
+
         var hardSkill = new HardSkill(entity.Name);
         return _mapper.Map<HardSkillDto>(await _hardSkillRepository.CreateAsync(hardSkill));
     }
@@ -54,8 +57,16 @@ public class HardSkillService : IHardSkillService
         if (hardSkill is null)
             throw new HardSkillNotFoundException();
 
+        if (await CheckIfExists(new HardSkillFilter() { Name = entity.Name }))
+            throw new HardSkillAlreadyExistsException();
+
         hardSkill.Update(entity.Name);
 
         return _mapper.Map<HardSkillDto>(await _hardSkillRepository.UpdateAsync(hardSkill));
+    }
+
+    public async Task<bool> CheckIfExists(HardSkillFilter filter)
+    {
+        return await _hardSkillRepository.CheckIfExists(x => x.Name.Equals(filter.Name));
     }
 }

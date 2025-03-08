@@ -7,4 +7,5 @@ public interface IDepartmentService
     public Task<DepartmentDto> GetAsync(long id);
     public Task<IEnumerable<DepartmentDto>> GetAllAsync(DepartmentFilter filter, IEnumerable<string>? includes = null);
     public Task<DepartmentDto> UpdateAsync(long id, DepartmentUpdateDto entity);
+    public Task<bool> CheckIfExists(DepartmentFilter filter);
 }
