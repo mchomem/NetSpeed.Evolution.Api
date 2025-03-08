@@ -1,11 +1,11 @@
 ﻿namespace NetSpeed.Evolution.Infrastructure.Persistence.Mappings;
 
-public class JobTitleMapping : IEntityTypeConfiguration<JobTitle>
+public class HardSkillMapping : IEntityTypeConfiguration<HardSkill>
 {
-    public void Configure(EntityTypeBuilder<JobTitle> builder)
+    public void Configure(EntityTypeBuilder<HardSkill> builder)
     {
         builder
-            .ToTable("JobTitle")
+            .ToTable("HardSkill")
             .HasKey(x => x.Id);
 
         builder
@@ -15,8 +15,8 @@ public class JobTitleMapping : IEntityTypeConfiguration<JobTitle>
 
         builder
             .Property(x => x.Name)
-            .HasColumnType("varchar(30)")
-            .IsRequired();            
+            .HasColumnType("varchar(50)")
+            .IsRequired();
 
         builder
             .Property(x => x.IsDeleted)
@@ -27,6 +27,6 @@ public class JobTitleMapping : IEntityTypeConfiguration<JobTitle>
         builder
             .HasIndex(x => x.Name)
             .IsUnique()
-            .HasDatabaseName("UK_JobTitle_Name");
+            .HasDatabaseName("UK_HardSkill_Name");
     }
 }

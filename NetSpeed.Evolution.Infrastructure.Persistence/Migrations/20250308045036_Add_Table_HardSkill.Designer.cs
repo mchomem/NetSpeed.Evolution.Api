@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NetSpeed.Evolution.Infrastructure.Persistence.Contexts;
 
@@ -11,9 +12,11 @@ using NetSpeed.Evolution.Infrastructure.Persistence.Contexts;
 namespace NetSpeed.Evolution.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250308045036_Add_Table_HardSkill")]
+    partial class Add_Table_HardSkill
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,10 +43,6 @@ namespace NetSpeed.Evolution.Infrastructure.Persistence.Migrations
                         .HasColumnType("varchar(30)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("Name")
-                        .IsUnique()
-                        .HasDatabaseName("UK_Department_Name");
 
                     b.ToTable("Department", (string)null);
                 });
@@ -112,10 +111,6 @@ namespace NetSpeed.Evolution.Infrastructure.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Name")
-                        .IsUnique()
-                        .HasDatabaseName("UK_HardSkill_Name");
-
                     b.ToTable("HardSkill", (string)null);
                 });
 
@@ -137,10 +132,6 @@ namespace NetSpeed.Evolution.Infrastructure.Persistence.Migrations
                         .HasColumnType("varchar(30)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("Name")
-                        .IsUnique()
-                        .HasDatabaseName("UK_JobTitle_Name");
 
                     b.ToTable("JobTitle", (string)null);
                 });

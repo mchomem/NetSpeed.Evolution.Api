@@ -23,6 +23,7 @@ public class DepartmentService : IDepartmentService
 
         if (department is null)
             throw new DepartmentNotFoundException();
+
         department.Delete();
 
         return _mapper.Map<DepartmentDto>(await _departmentRepository.UpdateAsync(department));
