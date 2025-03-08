@@ -23,5 +23,10 @@ public class HardSkillMapping : IEntityTypeConfiguration<HardSkill>
             .HasColumnType("bit")
             .HasDefaultValueSql("0")
             .IsRequired();
+
+        builder
+            .HasIndex(x => x.Name)
+            .IsUnique()
+            .HasDatabaseName("UK_HardSkill_Name");
     }
 }

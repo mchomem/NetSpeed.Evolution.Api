@@ -23,5 +23,10 @@ public class DepartmentMapping : IEntityTypeConfiguration<Department>
             .HasColumnType("bit")
             .HasDefaultValueSql("0")
             .IsRequired();
+
+        builder
+            .HasIndex(x => x.Name)
+            .IsUnique()
+            .HasDatabaseName("UK_Department_Name");
     }
 }
