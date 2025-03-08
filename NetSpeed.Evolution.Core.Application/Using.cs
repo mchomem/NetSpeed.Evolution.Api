@@ -1,0 +1,9 @@
+﻿global using AutoMapper;
+global using NetSpeed.Evolution.Core.Application.DTOs;
+global using NetSpeed.Evolution.Core.Application.Filters;
+global using NetSpeed.Evolution.Core.Application.Interfaces;
+global using NetSpeed.Evolution.Core.Domain.Entities;
+global using NetSpeed.Evolution.Core.Domain.Exceptions.Department;
+global using NetSpeed.Evolution.Core.Domain.Exceptions.JobTitle;
+global using NetSpeed.Evolution.Core.Domain.Interfaces;
+global using System.Linq.Expressions;
