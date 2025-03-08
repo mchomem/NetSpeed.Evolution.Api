@@ -38,4 +38,10 @@ public class JobTitleRepository : IJobTitleRepository
         var jobTitles = await _repositoryBase.UpdateAsync(entity);
         return jobTitles;
     }
+
+    public async Task<bool> CheckIfExists(Expression<Func<JobTitle, bool>> filter)
+    {
+        var exists = await _repositoryBase.CheckIfExists(filter);
+        return exists;
+    }
 }

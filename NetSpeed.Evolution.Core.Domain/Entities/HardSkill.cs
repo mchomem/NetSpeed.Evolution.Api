@@ -18,7 +18,7 @@ public class HardSkill : BaseEntity
         Name = name;
     }
 
-    public void Deleted()
+    public void Delete()
     {
         IsDeleted = true;
     }

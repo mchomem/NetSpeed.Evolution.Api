@@ -38,4 +38,10 @@ public class DepartmentRepository : IDepartmentRepository
         var department = await _repositoryBase.UpdateAsync(entity);
         return department;
     }
+
+    public async Task<bool> CheckIfExists(Expression<Func<Department, bool>> filter)
+    {
+        var exists = await _repositoryBase.CheckIfExists(filter);
+        return exists;
+    }
 }

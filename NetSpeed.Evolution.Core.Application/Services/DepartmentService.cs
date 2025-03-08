@@ -13,6 +13,9 @@ public class DepartmentService : IDepartmentService
 
     public async Task<DepartmentDto> CreateAsync(DepartmentInsertDto entity)
     {
+        if (await CheckIfExists(new DepartmentFilter() { Name = entity.Name }))
+            throw new DepartmentAlreadyExistsException();
+
         var department = new Department(entity.Name);
         return _mapper.Map<DepartmentDto>(await _departmentRepository.CreateAsync(department));
     }
@@ -23,6 +26,7 @@ public class DepartmentService : IDepartmentService
 
         if (department is null)
             throw new DepartmentNotFoundException();
+
         department.Delete();
 
         return _mapper.Map<DepartmentDto>(await _departmentRepository.UpdateAsync(department));
@@ -53,8 +57,16 @@ public class DepartmentService : IDepartmentService
         if (department is null)
             throw new DepartmentNotFoundException();
 
+        if (await CheckIfExists(new DepartmentFilter() { Name = entity.Name }))
+            throw new DepartmentAlreadyExistsException();
+
         department.Update(entity.Name);
 
         return _mapper.Map<DepartmentDto>(await _departmentRepository.UpdateAsync(department));
+    }
+
+    public async Task<bool> CheckIfExists(DepartmentFilter filter)
+    {
+        return await _departmentRepository.CheckIfExists(x => x.Name.Equals(filter.Name));
     }
 }
