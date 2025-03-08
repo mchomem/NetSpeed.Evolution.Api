@@ -41,7 +41,7 @@ public class EmployeeMapping : IEntityTypeConfiguration<Employee>
             .HasDefaultValueSql("0")
             .IsRequired();
 
-        #region Foreign Key mapping for Rental table.
+        #region Foreign key to table.
 
         builder
             .HasOne(e => e.Manager)
