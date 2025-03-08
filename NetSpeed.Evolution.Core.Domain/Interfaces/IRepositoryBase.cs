@@ -8,4 +8,5 @@ public interface IRepositoryBase<TEntity> where TEntity : class
     public Task<TEntity> GetAsync(long id);
     public Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> filter, IEnumerable<string>? includes = null);
     public Task<TEntity> UpdateAsync(TEntity entity);
+    public Task<bool> CheckIfExists(Expression<Func<TEntity, bool>> filter);
 }

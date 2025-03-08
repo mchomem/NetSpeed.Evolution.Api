@@ -38,4 +38,10 @@ public class HardSkillRepository : IHardSkillRepository
         var hardSkill = await _repositoryBase.UpdateAsync(entity);
         return hardSkill;
     }
+
+    public async Task<bool> CheckIfExists(Expression<Func<HardSkill, bool>> filter)
+    {
+        var exists = await _repositoryBase.CheckIfExists(filter);
+        return exists;
+    }
 }
