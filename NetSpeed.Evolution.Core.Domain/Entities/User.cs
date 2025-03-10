@@ -4,21 +4,41 @@ public class User : BaseEntity
 {
     private User() { }
 
-    public User(string name, string password, bool blocked)
+    public User(string login, string password)
     {
-        Name = name;
+        CheckPassword(password);
+
+        Login = login;
         Password = password;
         Blocked = false;
     }
 
-    public string Name { get; private set; }
+    public string Login { get; private set; }
     public string Password { get; private set; }
     public bool Blocked { get; private set; }
 
-    public void Update(string name, bool blocked)
+    public void ChangePassword(string password)
     {
-        Name = name;
-        Blocked = blocked;
+        CheckPassword(password);
+        Password = password;
+    }
+
+    public void CheckPassword(string password)
+    {
+        var maxLength = 8;
+
+        if (password.Length < maxLength)
+            throw new UserPasswordInsufficientLengthException($"Password must contain more than {maxLength} characters");
+
+        var regexStringOnly = new Regex("[a-zZ-Z]");
+
+        if (!regexStringOnly.IsMatch(password))
+            throw new UserPasswordWithoutLettersException();
+
+        var regexNumberOnly = new Regex(@".*\d");
+
+        if (!regexNumberOnly.IsMatch(password))
+            throw new UserPasswordWithoutNumbersException();
     }
 
     public void Block()
