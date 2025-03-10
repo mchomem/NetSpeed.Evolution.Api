@@ -15,11 +15,17 @@ public class JobTitle : BaseEntity
 
     public void Update(string name)
     {
+        if (IsDeleted)
+            throw new JobTitleDeletedRecordHandlingException();
+
         Name = name;
     }
 
     public void Delete()
     {
+        if(IsDeleted)
+            throw new JobTitleDeletedRecordHandlingException();
+
         IsDeleted = true;
     }
 
