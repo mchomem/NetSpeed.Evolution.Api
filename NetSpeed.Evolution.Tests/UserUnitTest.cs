@@ -14,7 +14,7 @@ public class UserUnitTest
      */
 
     [Fact]
-    public void ChangePassword_SingleString_ReturnUserPasswordInsufficientLengthException()
+    public void CheckPassword_SingleString_ReturnUserPasswordInsufficientLengthException()
     {
         // Arrange
         var user = new User("john.thunder", "john12345");
@@ -22,12 +22,12 @@ public class UserUnitTest
         // Act & Assert
         Assert.Throws<UserPasswordInsufficientLengthException>(() =>
         {
-            user.ChangePassword("123");
+            user.CheckPassword("123");
         });
     }
 
     [Fact]
-    public void ChangePassword_SingleString_ReturnUserPasswordWithoutLettersException()
+    public void CheckPassword_SingleString_ReturnUserPasswordWithoutLettersException()
     {
         // Arrange
         var user = new User("john.thunder", "john12345");
@@ -35,12 +35,12 @@ public class UserUnitTest
         // Act & Assert
         Assert.Throws<UserPasswordWithoutLettersException>(() =>
         {
-            user.ChangePassword("0123456789");
+            user.CheckPassword("0123456789");
         });
     }
 
     [Fact]
-    public void ChangePassword_SingleString_ReturnUserPasswordWithoutNumbersException()
+    public void CheckPassword_SingleString_ReturnUserPasswordWithoutNumbersException()
     {
         // Arrange
         var user = new User("john.thunder", "john12345");
@@ -48,7 +48,7 @@ public class UserUnitTest
         // Act & Assert
         Assert.Throws<UserPasswordWithoutNumbersException>(() =>
         {
-            user.ChangePassword("john.thunder");
+            user.CheckPassword("john.thunder");
         });
     }
 }
