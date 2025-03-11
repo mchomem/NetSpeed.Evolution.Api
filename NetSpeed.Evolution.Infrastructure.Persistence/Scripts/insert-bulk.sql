@@ -108,3 +108,11 @@ values
 ('XAML'),
 ('XML');
 go
+
+insert into JobTitle([Name])
+values
+('Gerente de Projetos')
+, ('Analista de Sistemas')
+, ('Desenvolvedor')
+, ('Analista de Testes')
+go

@@ -15,11 +15,17 @@ public class Department : BaseEntity
 
     public void Update(string name)
     {
+        if (IsDeleted)
+            throw new DepartmentDeletedRecordHandlingException();
+
         Name = name;
     }
 
     public void Delete()
     {
+        if (IsDeleted)
+            throw new DepartmentDeletedRecordHandlingException();
+
         IsDeleted = true;
     }
 

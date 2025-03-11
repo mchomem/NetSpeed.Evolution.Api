@@ -15,11 +15,17 @@ public class HardSkill : BaseEntity
 
     public void Update(string name)
     {
+        if(IsDeleted)        
+            throw new HardSkillDeletedRecordHandlingException();
+
         Name = name;
     }
 
     public void Delete()
     {
+        if (IsDeleted)
+            throw new HardSkillDeletedRecordHandlingException();
+
         IsDeleted = true;
     }
 }
