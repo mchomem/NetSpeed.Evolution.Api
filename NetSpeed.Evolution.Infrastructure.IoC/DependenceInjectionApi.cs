@@ -14,10 +14,12 @@ public static class DependenceInjectionApi
         services.AddScoped<IJobTitleRepository, JobTitleRepository>();
         services.AddScoped<IDepartmentRepository, DepartmentRepository>();
         services.AddScoped<IHardSkillRepository, HardSkillRepository>();
+        services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 
         services.AddScoped<IJobTitleService, JobTitleService>();
         services.AddScoped<IDepartmentService, DepartmentService>();
         services.AddScoped<IHardSkillService, HardSkillService>();
+        services.AddScoped<IEmployeeService, EmployeeService>();
 
         services.AddAutoMapper(typeof(ProfileMapping));
 

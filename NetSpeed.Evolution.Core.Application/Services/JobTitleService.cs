@@ -11,6 +11,12 @@ public class JobTitleService : IJobTitleService
         _mapper = mapper;
     }
 
+    public async Task<bool> CheckIfExists(JobTitleFilter filter)
+    {
+        var exists = await _jobTitleRepository.CheckIfExists(x => x.Name.Equals(filter.Name));
+        return exists;
+    }
+
     public async Task<JobTitleDto> CreateAsync(JobTitleInsertDto entity)
     {
         if (await CheckIfExists(new JobTitleFilter() { Name = entity.Name }))
@@ -63,10 +69,5 @@ public class JobTitleService : IJobTitleService
         jobTitle.Update(entity.Name);
 
         return _mapper.Map<JobTitleDto>(await _jobTitleRepository.UpdateAsync(jobTitle));
-    }
-
-    public async Task<bool> CheckIfExists(JobTitleFilter filter)
-    {
-        return await _jobTitleRepository.CheckIfExists(x => x.Name.Equals(filter.Name));
     }
 }

@@ -41,6 +41,11 @@ public class EmployeeMapping : IEntityTypeConfiguration<Employee>
             .HasDefaultValueSql("0")
             .IsRequired();
 
+        builder
+            .HasIndex(x => x.RegistrationNumber)
+            .IsUnique()
+            .HasDatabaseName("UK_Employee_RegistrationNumber");
+
         #region Foreign key to table.
 
         builder

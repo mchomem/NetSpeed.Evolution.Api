@@ -4,7 +4,7 @@ public class Employee : BaseEntity
 {
     private Employee() { }
 
-    public Employee(string name, string email, string registrationNumber, long managerId, long jobTitleId, long departmentId)
+    public Employee(string name, string email, string registrationNumber, long? managerId, long jobTitleId, long departmentId)
     {
         Name = name;
         Email = email;
@@ -23,15 +23,17 @@ public class Employee : BaseEntity
     public long DepartmentId { get; private set; }
     public bool IsDeleted { get; private set; }
 
-    public void Update(string name, string email, string registrationNumber, long managerId)
+    public void Update(string name, string email, string registrationNumber, long? managerId, long jobTitleId, long departmentId)
     {
         Name = name;
         Email = email;
         RegistrationNumber = registrationNumber;
         ManagerId = managerId;
+        JobTitleId = jobTitleId;
+        DepartmentId = departmentId;
     }
 
-    public void Deleted()
+    public void Delete()
     {
         IsDeleted = true;
     }
