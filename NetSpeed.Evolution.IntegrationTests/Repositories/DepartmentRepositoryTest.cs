@@ -3,6 +3,7 @@
 public class DepartmentRepositoryTest : IDisposable
 {
     private readonly AppDbContext _dbContext;
+    private readonly RepositoryBase<Department> _repositoryBase;
     private readonly DepartmentRepository _departmentRepository;
     private bool _disposed = false;
 
@@ -15,8 +16,8 @@ public class DepartmentRepositoryTest : IDisposable
         _dbContext = new AppDbContext(options);
         _dbContext.Database.EnsureCreated();
 
-        var repositoryBase = new RepositoryBase<Department>(_dbContext);
-        _departmentRepository = new DepartmentRepository(repositoryBase);
+        _repositoryBase = new RepositoryBase<Department>(_dbContext);
+        _departmentRepository = new DepartmentRepository(_repositoryBase);
     }
 
     protected virtual void Dispose(bool disposing)
@@ -51,7 +52,7 @@ public class DepartmentRepositoryTest : IDisposable
         result.Should().NotBeNull();
         result.Id.Should().BeGreaterThan(0);
 
-        var dbDepartment = await _dbContext.Department.FindAsync(result.Id);
+        var dbDepartment = await _repositoryBase.GetAsync(result.Id);
         dbDepartment.Should().NotBeNull();
         dbDepartment.Name.Should().Be("TI");        
     }
@@ -61,8 +62,7 @@ public class DepartmentRepositoryTest : IDisposable
     {
         // Arrange
         var department = new Department("RH");
-        await _dbContext.Department.AddAsync(department);
-        await _dbContext.SaveChangesAsync();
+        await _repositoryBase.CreateAsync(department);
 
         // Act
         var result = await _departmentRepository.GetAsync(department.Id);
@@ -76,11 +76,8 @@ public class DepartmentRepositoryTest : IDisposable
     public async Task GetAllAsync_ShouldReturnAllDepartments()
     {
         // Arrange
-        await _dbContext.Department.AddRangeAsync(
-            new Department("Financeiro"),
-            new Department("Compras")
-        );
-        await _dbContext.SaveChangesAsync();
+        await _repositoryBase.CreateAsync(new Department("Financeiro"));
+        await _repositoryBase.CreateAsync(new Department("Compras"));
 
         // Act
         var result = await _departmentRepository.GetAllAsync(_ => true);
@@ -94,8 +91,7 @@ public class DepartmentRepositoryTest : IDisposable
     {
         // Arrange
         var department = new Department("Jurídico");
-        await _dbContext.Department.AddAsync(department);
-        await _dbContext.SaveChangesAsync();
+        await _repositoryBase.CreateAsync(department);
 
         department.Update("Legal");
 
@@ -106,7 +102,7 @@ public class DepartmentRepositoryTest : IDisposable
         result.Should().NotBeNull();
         result.Name.Should().Be("Legal");
 
-        var dbDepartment = await _dbContext.Department.FindAsync(department.Id);
+        var dbDepartment = await _repositoryBase.GetAsync(department.Id);
         dbDepartment.Name.Should().Be("Legal");
     }
 
@@ -115,14 +111,13 @@ public class DepartmentRepositoryTest : IDisposable
     {
         // Arrange
         var department = new Department("Marketing");
-        await _dbContext.Department.AddAsync(department);
-        await _dbContext.SaveChangesAsync();
+        await _repositoryBase.CreateAsync(department);
 
         // Act
         await _departmentRepository.DeleteAsync(department);
 
         // Assert
-        var dbDepartment = await _dbContext.Department.FindAsync(department.Id);
+        var dbDepartment = await _repositoryBase.GetAsync(department.Id);
         dbDepartment.Should().BeNull();
     }
 
@@ -131,8 +126,7 @@ public class DepartmentRepositoryTest : IDisposable
     {
         // Arrange
         var department = new Department ("TI");
-        await _dbContext.Department.AddAsync(department);
-        await _dbContext.SaveChangesAsync();
+        await _repositoryBase.CreateAsync(department);
 
         // Act
         var exists = await _departmentRepository.CheckIfExists(d => d.Name == "TI");
