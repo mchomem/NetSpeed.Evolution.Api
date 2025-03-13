@@ -23,7 +23,7 @@ public class EmployeeController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetAsync(long id)
+    public async Task<IActionResult> GetAsync([FromRoute] long id)
     {
         var employee = await _employeeService.GetAsync(id);
 
@@ -41,14 +41,14 @@ public class EmployeeController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutAsync(long id, [FromBody] EmployeeUpdateDto emlpoyeeDto)
+    public async Task<IActionResult> PutAsync([FromRoute] long id, [FromBody] EmployeeUpdateDto emlpoyeeDto)
     {
         var employee = await _employeeService.UpdateAsync(id, emlpoyeeDto);
         return Ok(new ApiResponse<EmployeeDto>(employee));
     }
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteAsync(long id)
+    public async Task<IActionResult> DeleteAsync([FromRoute] long id)
     {
         var employee = await _employeeService.DeleteAsync(id);
         return Ok(new ApiResponse<EmployeeDto>(employee));

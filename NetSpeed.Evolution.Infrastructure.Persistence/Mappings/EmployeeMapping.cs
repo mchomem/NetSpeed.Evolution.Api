@@ -19,6 +19,11 @@ public class EmployeeMapping : IEntityTypeConfiguration<Employee>
             .IsRequired();
 
         builder
+            .Property(x => x.Email)
+            .HasColumnType("varchar(100)")
+            .IsRequired();
+
+        builder
             .Property(x => x.RegistrationNumber)
             .HasColumnType("varchar(15)")
             .IsRequired();

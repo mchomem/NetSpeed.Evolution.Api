@@ -1,6 +1,4 @@
-﻿using NetSpeed.Evolution.Core.Application.DTOs;
-
-namespace NetSpeed.Evolution.Api.Controllers;
+﻿namespace NetSpeed.Evolution.Api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -25,7 +23,7 @@ public class HardSkillController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetAsync(long id)
+    public async Task<IActionResult> GetAsync([FromRoute] long id)
     {
         var hardSkill = await _hardSkillService.GetAsync(id);
 
@@ -43,14 +41,14 @@ public class HardSkillController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutAsync(long id, [FromBody] HardSkillUpdateDto hardSkillDto)
+    public async Task<IActionResult> PutAsync([FromRoute] long id, [FromBody] HardSkillUpdateDto hardSkillDto)
     {
         var hardSkill = await _hardSkillService.UpdateAsync(id, hardSkillDto);
         return Ok(new ApiResponse<HardSkillDto>(hardSkill));
     }
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteAsync(long id)
+    public async Task<IActionResult> DeleteAsync([FromRoute] long id)
     {
         var hardSkill = await _hardSkillService.DeleteAsync(id);
         return Ok(new ApiResponse<HardSkillDto>(hardSkill));

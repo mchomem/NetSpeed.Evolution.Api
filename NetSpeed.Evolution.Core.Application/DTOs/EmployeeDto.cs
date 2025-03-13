@@ -10,6 +10,9 @@ public class EmployeeDto
     public long JobTitleId { get; set; }
     public long DepartmentId { get; set; }
     public bool IsDeleted { get; set; }
+    public EmployeeDto? Manager { get; set; }
+    public JobTitleDto JobTitle { get; set; }
+    public DepartmentDto Department { get; set; }
 }
 
 public class EmployeeInsertDto

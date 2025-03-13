@@ -4,6 +4,8 @@ public static class DependenceInjectionApi
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
+        #region DbContext
+
         services.AddDbContext<AppDbContext>(options =>
         {
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
@@ -11,15 +13,27 @@ public static class DependenceInjectionApi
         services.AddScoped<AppDbContext, AppDbContext>();
         services.AddScoped(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));
 
+        #endregion
+
+        #region Repositories
+
         services.AddScoped<IJobTitleRepository, JobTitleRepository>();
         services.AddScoped<IDepartmentRepository, DepartmentRepository>();
         services.AddScoped<IHardSkillRepository, HardSkillRepository>();
         services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+        services.AddScoped<IEmployeeHardSkillRepository, EmployeeHardSkillRepository>();
+
+        #endregion
+
+        #region Services
 
         services.AddScoped<IJobTitleService, JobTitleService>();
         services.AddScoped<IDepartmentService, DepartmentService>();
         services.AddScoped<IHardSkillService, HardSkillService>();
         services.AddScoped<IEmployeeService, EmployeeService>();
+        services.AddScoped<IEmployeeHardSkillService, EmployeeHardSkillService>();
+
+        #endregion
 
         services.AddAutoMapper(typeof(ProfileMapping));
 

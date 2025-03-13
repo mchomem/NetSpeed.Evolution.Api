@@ -48,5 +48,7 @@ public class Employee : BaseEntity
 
     public ICollection<Employee> Subordinates { get; private set; }
 
+    public ICollection<EmployeeHardSkill> EmployeeHardSkills { get; private set; }
+
     #endregion
 }

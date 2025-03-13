@@ -41,7 +41,7 @@ public class EmployeeService : IEmployeeService
             throw new DepartmentNotFoundException();
 
         if (await CheckIfExists(new EmployeeFilter() { RegistrationNumber = entity.RegistrationNumber }))
-            throw new EmployeeNotFoundException();
+            throw new EmployeeAlreadyExistsException();
 
         var employee = new Employee(entity.Name, entity.Email, entity.RegistrationNumber, entity.ManagerId, entity.JobTitleId, entity.DepartmentId);
         return _mapper.Map<EmployeeDto>(await _employeeRepository.CreateAsync(employee));
@@ -66,7 +66,7 @@ public class EmployeeService : IEmployeeService
                 && (!x.IsDeleted)
             );
 
-        IEnumerable<string> includes = new List<string> { nameof(JobTitle), nameof(Department) };
+        IEnumerable<string> includes = new List<string> { nameof(JobTitle), nameof(Department), "Manager" };
         IEnumerable<Employee> employees = await _employeeRepository.GetAllAsync(expressionFilter, includes);
         return _mapper.Map<IEnumerable<EmployeeDto>>(employees);
     }
@@ -106,7 +106,7 @@ public class EmployeeService : IEmployeeService
 
         // A matrícula do colaborador não pode ser usada novamente.
         if (await CheckIfExists(new EmployeeFilter() { RegistrationNumber = entity.RegistrationNumber }))
-            throw new EmployeeNotFoundException();
+            throw new EmployeeAlreadyExistsException();
 
         employee.Update(entity.Name, entity.Email, entity.RegistrationNumber, entity.ManagerId, entity.JobTitleId, entity.DepartmentId);
 

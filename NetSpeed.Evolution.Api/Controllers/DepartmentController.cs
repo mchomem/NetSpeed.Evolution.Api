@@ -14,16 +14,16 @@ public class DepartmentController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetAllAsync([FromQuery] DepartmentFilter filter)
     {
-        var department = await _departmentService.GetAllAsync(filter);
+        var departments  = await _departmentService.GetAllAsync(filter);
 
-        if (!department.Any())
+        if (!departments.Any())
             return NotFound(new ApiResponse<IEnumerable<DepartmentDto>>(null!, DefaultMessages.DepartmentNotFound));
 
-        return Ok(new ApiResponse<IEnumerable<DepartmentDto>>(department));
+        return Ok(new ApiResponse<IEnumerable<DepartmentDto>>(departments));
     }
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetAsync(long id)
+    public async Task<IActionResult> GetAsync([FromRoute] long id)
     {
         var department = await _departmentService.GetAsync(id);
 
@@ -41,14 +41,14 @@ public class DepartmentController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutAsync(long id, [FromBody] DepartmentUpdateDto departmentDto)
+    public async Task<IActionResult> PutAsync([FromRoute] long id, [FromBody] DepartmentUpdateDto departmentDto)
     {
         var department = await _departmentService.UpdateAsync(id, departmentDto);
         return Ok(new ApiResponse<DepartmentDto>(department));
     }
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteAsync(long id)
+    public async Task<IActionResult> DeleteAsync([FromRoute] long id)
     {
         var department = await _departmentService.DeleteAsync(id);
         return Ok(new ApiResponse<DepartmentDto>(department));

@@ -28,4 +28,10 @@ public class HardSkill : BaseEntity
 
         IsDeleted = true;
     }
+
+    #region Navigation Properties
+
+    public ICollection<EmployeeHardSkill> EmployeeHardSkills { get; private set; }
+
+    #endregion
 }

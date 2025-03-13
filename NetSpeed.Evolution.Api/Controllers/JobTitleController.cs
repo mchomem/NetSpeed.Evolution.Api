@@ -23,7 +23,7 @@ public class JobTitleController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetAsync(long id)
+    public async Task<IActionResult> GetAsync([FromRoute] long id)
     {
         var jobTitle = await _jobTitleService.GetAsync(id);
 
@@ -41,14 +41,14 @@ public class JobTitleController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutAsync(long id, [FromBody] JobTitleUpdateDto jobTitleDto)
+    public async Task<IActionResult> PutAsync([FromRoute] long id, [FromBody] JobTitleUpdateDto jobTitleDto)
     {
         var jobTitle = await _jobTitleService.UpdateAsync(id, jobTitleDto);
         return Ok(new ApiResponse<JobTitleDto>(jobTitle));
     }
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteAsync(long id)
+    public async Task<IActionResult> DeleteAsync([FromRoute] long id)
     {
         var jobTitle = await _jobTitleService.DeleteAsync(id);
         return Ok(new ApiResponse<JobTitleDto>(jobTitle));
