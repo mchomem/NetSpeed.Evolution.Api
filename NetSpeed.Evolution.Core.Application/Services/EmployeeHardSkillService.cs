@@ -56,9 +56,9 @@ public class EmployeeHardSkillService : IEmployeeHardSkillService
     {
         Expression<Func<EmployeeHardSkill, bool>> expressionFilter =
             x => (
-                (filter.EmployeeId.HasValue || x.EmployeeId == filter.EmployeeId.Value)
-                && (filter.HardSkillId.HasValue || x.HardSkillId == filter.HardSkillId.Value)
-                && (filter.Level.HasValue || x.Level == filter.Level.Value)
+                (!filter.EmployeeId.HasValue || x.EmployeeId == filter.EmployeeId.Value)
+                && (!filter.HardSkillId.HasValue || x.HardSkillId == filter.HardSkillId.Value)
+                && (!filter.Level.HasValue || x.Level == filter.Level.Value)
             );
 
         IEnumerable<string> includes = new List<string>() { nameof(Employee), nameof(HardSkill) };
@@ -77,7 +77,7 @@ public class EmployeeHardSkillService : IEmployeeHardSkillService
     {
         var employeeHardSkill = await _employeeHardSkillRepository.GetAsync(x => x.EmployeeId == employeeId && x.HardSkillId == hardSkillId);
         var employee = await _employeeRepository.GetAsync(entity.EmployeeId);
-        var hardSkill = await _hardSkillRepository.GetAsync(entity.HardSkillId);        
+        var hardSkill = await _hardSkillRepository.GetAsync(entity.HardSkillId);
 
         if (employee is null)
             throw new EmployeeNotFoundException();

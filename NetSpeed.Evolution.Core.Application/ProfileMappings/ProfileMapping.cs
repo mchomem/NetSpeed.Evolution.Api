@@ -35,5 +35,13 @@ public class ProfileMapping : Profile
         CreateMap<Employee, EmployeeUpdateDto>().ReverseMap();
 
         #endregion
+
+        #region EmployeeHardSkill
+
+        CreateMap<EmployeeHardSkill, EmployeeHardSkillDto>().ReverseMap();
+        CreateMap<EmployeeHardSkill, EmployeeHardSkillInsertDto>().ReverseMap();
+        CreateMap<EmployeeHardSkill, EmployeeHardSkillUpdateDto>().ReverseMap();
+
+        #endregion
     }
 }
