@@ -2,11 +2,11 @@
 
 public class AppDbContext : DbContext
 {
-    DbSet<JobTitle> JobTitle { get; set; }
-    DbSet<Department> Department { get; set; }
-    DbSet<HardSkill> HardSkill { get; set; }
-    DbSet<Employee> Employee { get; set; }
-    DbSet<EmployeeHardSkill> EmployeeHardSkill { get; set; }
+    public DbSet<JobTitle> JobTitle { get; set; }
+    public DbSet<Department> Department { get; set; }
+    public DbSet<HardSkill> HardSkill { get; set; }
+    public DbSet<Employee> Employee { get; set; }
+    public DbSet<EmployeeHardSkill> EmployeeHardSkill { get; set; }
 
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
