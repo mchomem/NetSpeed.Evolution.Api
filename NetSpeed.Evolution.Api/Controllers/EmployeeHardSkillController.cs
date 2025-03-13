@@ -23,7 +23,7 @@ public class EmployeeHardSkillController : ControllerBase
     }
 
     [HttpGet("{employeeId}/{hardSkillId}")]
-    public async Task<IActionResult> GetActionResultAsync(long employeeId, long hardSkillId)
+    public async Task<IActionResult> GetActionResultAsync([FromRoute] long employeeId, [FromRoute] long hardSkillId)
     {
         var employeeHardSkill = await _employeeHardSkillService.GetAsync(employeeId, hardSkillId);
 
