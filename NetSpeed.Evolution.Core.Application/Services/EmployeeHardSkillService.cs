@@ -60,15 +60,22 @@ public class EmployeeHardSkillService : IEmployeeHardSkillService
                 && (!filter.HardSkillId.HasValue || x.HardSkillId == filter.HardSkillId.Value)
                 && (!filter.Level.HasValue || x.Level == filter.Level.Value)
             );
+        
+        IEnumerable<Expression<Func<EmployeeHardSkill, object>>> includes = new List<Expression<Func<EmployeeHardSkill, object>>>()
+        { 
+            x => x.Employee, x => x.HardSkill
+        };
 
-        IEnumerable<string> includes = new List<string>() { nameof(Employee), nameof(HardSkill) };
         IEnumerable<EmployeeHardSkill> employeeHardSkills = await _employeeHardSkillRepository.GetAllAsync(expressionFilter, includes);
         return _mapper.Map<IEnumerable<EmployeeHardSkillDto>>(employeeHardSkills);
     }
 
     public async Task<EmployeeHardSkillDto> GetAsync(long employeeId, long hardSkillId)
     {
-        IEnumerable<string> includes = new List<string>() { nameof(Employee), nameof(HardSkill) };
+        IEnumerable<Expression<Func<EmployeeHardSkill, object>>> includes = new List<Expression<Func<EmployeeHardSkill, object>>>()
+        {
+            x => x.Employee, x => x.HardSkill
+        };
         var employeeHardSkill = await _employeeHardSkillRepository.GetAsync(x => x.EmployeeId == employeeId && x.HardSkillId == hardSkillId, includes);
         return _mapper.Map<EmployeeHardSkillDto>(employeeHardSkill);
     }

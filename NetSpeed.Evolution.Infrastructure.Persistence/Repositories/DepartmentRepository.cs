@@ -27,7 +27,7 @@ public class DepartmentRepository : IDepartmentRepository
         return department;
     }
 
-    public async Task<IEnumerable<Department>> GetAllAsync(Expression<Func<Department, bool>> filter, IEnumerable<string>? includes = null)
+    public async Task<IEnumerable<Department>> GetAllAsync(Expression<Func<Department, bool>> filter, IEnumerable<Expression<Func<Department, object>>>? includes = null)
     {
         var departments = await _repositoryBase.GetAllAsync(filter, includes);
         return departments;

@@ -27,7 +27,7 @@ public class EmployeeHardSkillRepository : IEmployeeHardSkillRepository
         return employeeHardSkill;
     }
 
-    public async Task<IEnumerable<EmployeeHardSkill>> GetAllAsync(Expression<Func<EmployeeHardSkill, bool>> filter, IEnumerable<string>? includes = null)
+    public async Task<IEnumerable<EmployeeHardSkill>> GetAllAsync(Expression<Func<EmployeeHardSkill, bool>> filter, IEnumerable<Expression<Func<EmployeeHardSkill, object>>>? includes = null)
     {
         var employeeHardSkills = await _repositoryBase.GetAllAsync(filter, includes);
         return employeeHardSkills;
@@ -39,7 +39,7 @@ public class EmployeeHardSkillRepository : IEmployeeHardSkillRepository
         return employeeHardSkill;
     }
 
-    public async Task<EmployeeHardSkill> GetAsync(Expression<Func<EmployeeHardSkill, bool>> filter, IEnumerable<string>? includes = null)
+    public async Task<EmployeeHardSkill> GetAsync(Expression<Func<EmployeeHardSkill, bool>> filter, IEnumerable<Expression<Func<EmployeeHardSkill, object>>>? includes = null)
     {
         var employeeHardSkill = await _repositoryBase.GetAsync(filter, includes);
         return employeeHardSkill;

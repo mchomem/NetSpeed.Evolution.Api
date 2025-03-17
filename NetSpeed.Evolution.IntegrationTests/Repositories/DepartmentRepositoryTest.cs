@@ -58,7 +58,7 @@ public class DepartmentRepositoryTest : IDisposable
     }
 
     [Fact]
-    public async Task GetAsync_SingleEntityDepartment_ShouldReturnDepartment_WhenExists()
+    public async Task GetAsync_SingleEntityDepartment_ShouldReturnDepartment()
     {
         // Arrange
         var department = new Department("RH");
@@ -73,7 +73,7 @@ public class DepartmentRepositoryTest : IDisposable
     }
 
     [Fact]
-    public async Task GetAllAsync_ShouldReturnAllDepartments()
+    public async Task GetAllAsync_EnumerableEntityDepartment_ShouldReturnAllDepartments()
     {
         // Arrange
         await _repositoryBase.CreateAsync(new Department("Financeiro"));
@@ -87,7 +87,7 @@ public class DepartmentRepositoryTest : IDisposable
     }
 
     [Fact]
-    public async Task UpdateAsync_ShouldModifyDepartment()
+    public async Task UpdateAsync_SingleEntityDepartment_ShouldModifyDepartment()
     {
         // Arrange
         var department = new Department("Jurídico");
@@ -107,7 +107,7 @@ public class DepartmentRepositoryTest : IDisposable
     }
 
     [Fact]
-    public async Task DeleteAsync_ShouldRemoveDepartment()
+    public async Task DeleteAsync_SingleEntityDepartment_ShouldRemoveDepartment()
     {
         // Arrange
         var department = new Department("Marketing");

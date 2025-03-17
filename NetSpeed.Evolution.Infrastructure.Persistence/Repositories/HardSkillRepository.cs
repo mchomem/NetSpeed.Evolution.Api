@@ -21,7 +21,7 @@ public class HardSkillRepository : IHardSkillRepository
         return hardSkill;
     }
 
-    public async Task<IEnumerable<HardSkill>> GetAllAsync(Expression<Func<HardSkill, bool>> filter, IEnumerable<string>? includes = null)
+    public async Task<IEnumerable<HardSkill>> GetAllAsync(Expression<Func<HardSkill, bool>> filter, IEnumerable<Expression<Func<HardSkill, object>>>? includes = null)
     {
         var hardSkills = await _repositoryBase.GetAllAsync(filter, includes);
         return hardSkills;

@@ -66,7 +66,13 @@ public class EmployeeService : IEmployeeService
                 && (!x.IsDeleted)
             );
 
-        IEnumerable<string> includes = new List<string> { nameof(JobTitle), nameof(Department), "Manager" };
+        IEnumerable<Expression<Func<Employee, object>>> includes = new List<Expression<Func<Employee, object>>>()
+        {
+            x => x.JobTitle,
+            x => x.Department,
+            x => x.Manager
+        };
+
         IEnumerable<Employee> employees = await _employeeRepository.GetAllAsync(expressionFilter, includes);
         return _mapper.Map<IEnumerable<EmployeeDto>>(employees);
     }

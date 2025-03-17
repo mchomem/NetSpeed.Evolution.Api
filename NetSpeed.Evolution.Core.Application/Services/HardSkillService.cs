@@ -38,7 +38,7 @@ public class HardSkillService : IHardSkillService
         return _mapper.Map<HardSkillDto>(await _hardSkillRepository.UpdateAsync(hardSkill));
     }
 
-    public async Task<IEnumerable<HardSkillDto>> GetAllAsync(HardSkillFilter filter, IEnumerable<string>? includes = null)
+    public async Task<IEnumerable<HardSkillDto>> GetAllAsync(HardSkillFilter filter)
     {
         Expression<Func<HardSkill, bool>> expressionFilter =
             x => (
@@ -46,7 +46,7 @@ public class HardSkillService : IHardSkillService
                 && (!x.IsDeleted)
             );
 
-        IEnumerable<HardSkill> hardSkills = await _hardSkillRepository.GetAllAsync(expressionFilter, includes);
+        IEnumerable<HardSkill> hardSkills = await _hardSkillRepository.GetAllAsync(expressionFilter);
         return _mapper.Map<IEnumerable<HardSkillDto>>(hardSkills);
     }
 

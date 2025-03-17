@@ -38,7 +38,7 @@ public class JobTitleService : IJobTitleService
         return _mapper.Map<JobTitleDto>(await _jobTitleRepository.UpdateAsync(jobTitle));
     }
 
-    public async Task<IEnumerable<JobTitleDto>> GetAllAsync(JobTitleFilter filter, IEnumerable<string>? includes = null)
+    public async Task<IEnumerable<JobTitleDto>> GetAllAsync(JobTitleFilter filter)
     {
         Expression<Func<JobTitle, bool>> expressionFilter =
             x => (
@@ -46,7 +46,7 @@ public class JobTitleService : IJobTitleService
                 && (!x.IsDeleted)
             );
 
-        IEnumerable<JobTitle> jobTitles = await _jobTitleRepository.GetAllAsync(expressionFilter, includes);
+        IEnumerable<JobTitle> jobTitles = await _jobTitleRepository.GetAllAsync(expressionFilter);
         return _mapper.Map<IEnumerable<JobTitleDto>>(jobTitles);
     }
 

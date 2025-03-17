@@ -27,7 +27,7 @@ public class EmployeeRepository : IEmployeeRepository
         return employee;
     }
 
-    public async Task<IEnumerable<Employee>> GetAllAsync(Expression<Func<Employee, bool>> filter, IEnumerable<string>? includes = null)
+    public async Task<IEnumerable<Employee>> GetAllAsync(Expression<Func<Employee, bool>> filter, IEnumerable<Expression<Func<Employee, object>>>? includes = null)
     {
         var employees = await _repositoryBase.GetAllAsync(filter, includes);
         return employees;
