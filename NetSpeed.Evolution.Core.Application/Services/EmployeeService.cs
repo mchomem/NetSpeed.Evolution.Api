@@ -79,7 +79,13 @@ public class EmployeeService : IEmployeeService
 
     public async Task<EmployeeDto> GetAsync(long id)
     {
-        var employee = await _employeeRepository.GetAsync(id);
+        IEnumerable<Expression<Func<Employee, object>>> includes = new List<Expression<Func<Employee, object>>>()
+        {
+            x => x.JobTitle,
+            x => x.Department,
+            x => x.Manager
+        };
+        var employee = await _employeeRepository.GetAsync(x => x.Id == id, includes);
 
         if (employee is null)
             throw new EmployeeNotFoundException();

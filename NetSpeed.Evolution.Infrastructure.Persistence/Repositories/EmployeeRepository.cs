@@ -39,6 +39,12 @@ public class EmployeeRepository : IEmployeeRepository
         return employee;
     }
 
+    public async Task<Employee> GetAsync(Expression<Func<Employee, bool>> filter, IEnumerable<Expression<Func<Employee, object>>>? includes = null)
+    {
+        var employee = await _repositoryBase.GetAsync(filter, includes);
+        return employee;
+    }
+
     public async Task<Employee> UpdateAsync(Employee entity)
     {
         var employee = await _repositoryBase.UpdateAsync(entity);
