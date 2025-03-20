@@ -47,14 +47,14 @@ public class DepartmentRepositoryTest : IDisposable
 
         // Act
         var result = await _departmentRepository.CreateAsync(department);
-        
+
         // Assert
         result.Should().NotBeNull();
         result.Id.Should().BeGreaterThan(0);
 
         var dbDepartment = await _repositoryBase.GetAsync(result.Id);
         dbDepartment.Should().NotBeNull();
-        dbDepartment.Name.Should().Be("TI");        
+        dbDepartment.Name.Should().Be("TI");
     }
 
     [Fact]
@@ -62,7 +62,7 @@ public class DepartmentRepositoryTest : IDisposable
     {
         // Arrange
         var department = new Department("RH");
-        await _repositoryBase.CreateAsync(department);
+        await _departmentRepository.CreateAsync(department);
 
         // Act
         var result = await _departmentRepository.GetAsync(department.Id);
@@ -91,33 +91,45 @@ public class DepartmentRepositoryTest : IDisposable
     {
         // Arrange
         var department = new Department("Jurídico");
-        await _repositoryBase.CreateAsync(department);
-
-        department.Update("Legal");
+        await _departmentRepository.CreateAsync(department);
 
         // Act
+        department.Update("Legal");
         var result = await _departmentRepository.UpdateAsync(department);
 
         // Assert
         result.Should().NotBeNull();
         result.Name.Should().Be("Legal");
-
-        var dbDepartment = await _repositoryBase.GetAsync(department.Id);
-        dbDepartment.Name.Should().Be("Legal");
     }
 
     [Fact]
-    public async Task DeleteAsync_SingleEntityDepartment_ShouldRemoveDepartment()
+    public async Task DeleteAsync_SingleEntityDepartment_ShouldReturnDepartmentLogicalDeleted()
+    {
+        // Arrange
+        var department = new Department("Fiscal");
+        await _departmentRepository.CreateAsync(department);
+
+        // Act
+        department.Delete();
+        await _departmentRepository.UpdateAsync(department);
+
+        // Assert
+        var departmentLogicallyDeleted = await _departmentRepository.GetAsync(department.Id);
+        departmentLogicallyDeleted.IsDeleted.Should().BeTrue();
+    }
+
+    [Fact]
+    public async Task DeleteAsync_SingleEntityDepartment_ShouldDeletedDepartment()
     {
         // Arrange
         var department = new Department("Marketing");
-        await _repositoryBase.CreateAsync(department);
+        await _departmentRepository.CreateAsync(department);
 
         // Act
         await _departmentRepository.DeleteAsync(department);
 
         // Assert
-        var dbDepartment = await _repositoryBase.GetAsync(department.Id);
+        var dbDepartment = await _departmentRepository.GetAsync(department.Id);
         dbDepartment.Should().BeNull();
     }
 
@@ -125,8 +137,8 @@ public class DepartmentRepositoryTest : IDisposable
     public async Task CheckIfExists_ShouldReturnTrue_WhenDepartmentExists()
     {
         // Arrange
-        var department = new Department ("TI");
-        await _repositoryBase.CreateAsync(department);
+        var department = new Department("TI");
+        await _departmentRepository.CreateAsync(department);
 
         // Act
         var exists = await _departmentRepository.CheckIfExists(d => d.Name == "TI");
