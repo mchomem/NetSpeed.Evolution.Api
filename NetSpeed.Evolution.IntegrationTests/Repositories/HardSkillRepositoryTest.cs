@@ -20,7 +20,7 @@ public class HardSkillRepositoryTest : IDisposable
         _hardSkillRepository = new HardSkillRepository(_repositoryBase);
     }
 
-    public void Dispose(bool disposing)
+    protected virtual void Dispose(bool disposing)
     {
         if (!_disposed)
         {
