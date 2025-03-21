@@ -10,12 +10,10 @@ public class DepartmentRepositoryTest : IDisposable
     public DepartmentRepositoryTest()
     {
         var options = new DbContextOptionsBuilder<AppDbContext>()
-            .UseInMemoryDatabase(databaseName: "TestDb")
+            .UseInMemoryDatabase(databaseName: $"TestDb_{Guid.NewGuid()}")
             .Options;
 
         _dbContext = new AppDbContext(options);
-        _dbContext.Database.EnsureCreated();
-
         _repositoryBase = new RepositoryBase<Department>(_dbContext);
         _departmentRepository = new DepartmentRepository(_repositoryBase);
     }
@@ -26,7 +24,6 @@ public class DepartmentRepositoryTest : IDisposable
         {
             if (disposing)
             {
-                _dbContext.Database.EnsureDeleted();
                 _dbContext.Dispose();
             }
             _disposed = true;
