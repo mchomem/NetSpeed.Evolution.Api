@@ -17,4 +17,10 @@ public class DefaultMessages
     public const string HardSkillNotFound = "HardSkill not found";
     public const string HardSkillAlreadyExists = "Hard skill already exists";
     public const string HardSkillDeletedRecordHandling = "Hard skill is already deleted";
+
+    public const string EmployeeNotFound = "Employee not found";
+    public const string EmployeeAlreadyExists = "Employee already exists";
+
+    public const string EmployeeHardSkillNotFound = "Employee hard skill not found";
+    public const string EmployeeHardSkillAlreadyExists = "Employee hard skill already exists";
 }

@@ -9,6 +9,12 @@ public class DepartmentRepository : IDepartmentRepository
         _repositoryBase = repositoryBase;
     }
 
+    public async Task<bool> CheckIfExists(Expression<Func<Department, bool>> filter)
+    {
+        var exists = await _repositoryBase.CheckIfExists(filter);
+        return exists;
+    }
+
     public async Task<Department> CreateAsync(Department entity)
     {
         var department = await _repositoryBase.CreateAsync(entity);
@@ -21,7 +27,7 @@ public class DepartmentRepository : IDepartmentRepository
         return department;
     }
 
-    public async Task<IEnumerable<Department>> GetAllAsync(Expression<Func<Department, bool>> filter, IEnumerable<string>? includes = null)
+    public async Task<IEnumerable<Department>> GetAllAsync(Expression<Func<Department, bool>> filter, IEnumerable<Expression<Func<Department, object>>>? includes = null)
     {
         var departments = await _repositoryBase.GetAllAsync(filter, includes);
         return departments;
@@ -37,11 +43,5 @@ public class DepartmentRepository : IDepartmentRepository
     {
         var department = await _repositoryBase.UpdateAsync(entity);
         return department;
-    }
-
-    public async Task<bool> CheckIfExists(Expression<Func<Department, bool>> filter)
-    {
-        var exists = await _repositoryBase.CheckIfExists(filter);
-        return exists;
     }
 }

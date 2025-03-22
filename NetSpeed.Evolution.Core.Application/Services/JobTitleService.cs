@@ -11,6 +11,12 @@ public class JobTitleService : IJobTitleService
         _mapper = mapper;
     }
 
+    public async Task<bool> CheckIfExists(JobTitleFilter filter)
+    {
+        var exists = await _jobTitleRepository.CheckIfExists(x => x.Name.Equals(filter.Name));
+        return exists;
+    }
+
     public async Task<JobTitleDto> CreateAsync(JobTitleInsertDto entity)
     {
         if (await CheckIfExists(new JobTitleFilter() { Name = entity.Name }))
@@ -32,7 +38,7 @@ public class JobTitleService : IJobTitleService
         return _mapper.Map<JobTitleDto>(await _jobTitleRepository.UpdateAsync(jobTitle));
     }
 
-    public async Task<IEnumerable<JobTitleDto>> GetAllAsync(JobTitleFilter filter, IEnumerable<string>? includes = null)
+    public async Task<IEnumerable<JobTitleDto>> GetAllAsync(JobTitleFilter filter)
     {
         Expression<Func<JobTitle, bool>> expressionFilter =
             x => (
@@ -40,7 +46,7 @@ public class JobTitleService : IJobTitleService
                 && (!x.IsDeleted)
             );
 
-        IEnumerable<JobTitle> jobTitles = await _jobTitleRepository.GetAllAsync(expressionFilter, includes);
+        IEnumerable<JobTitle> jobTitles = await _jobTitleRepository.GetAllAsync(expressionFilter);
         return _mapper.Map<IEnumerable<JobTitleDto>>(jobTitles);
     }
 
@@ -63,10 +69,5 @@ public class JobTitleService : IJobTitleService
         jobTitle.Update(entity.Name);
 
         return _mapper.Map<JobTitleDto>(await _jobTitleRepository.UpdateAsync(jobTitle));
-    }
-
-    public async Task<bool> CheckIfExists(JobTitleFilter filter)
-    {
-        return await _jobTitleRepository.CheckIfExists(x => x.Name.Equals(filter.Name));
     }
 }

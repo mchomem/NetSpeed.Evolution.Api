@@ -11,6 +11,12 @@ public class DepartmentService : IDepartmentService
         _mapper = mapper;
     }
 
+    public async Task<bool> CheckIfExists(DepartmentFilter filter)
+    {
+        var exists = await _departmentRepository.CheckIfExists(x => x.Name.Equals(filter.Name));
+        return exists;
+    }
+
     public async Task<DepartmentDto> CreateAsync(DepartmentInsertDto entity)
     {
         if (await CheckIfExists(new DepartmentFilter() { Name = entity.Name }))
@@ -28,11 +34,10 @@ public class DepartmentService : IDepartmentService
             throw new DepartmentNotFoundException();
 
         department.Delete();
-
         return _mapper.Map<DepartmentDto>(await _departmentRepository.UpdateAsync(department));
     }
 
-    public async Task<IEnumerable<DepartmentDto>> GetAllAsync(DepartmentFilter filter, IEnumerable<string>? includes = null)
+    public async Task<IEnumerable<DepartmentDto>> GetAllAsync(DepartmentFilter filter)
     {
         Expression<Func<Department, bool>> expressionFilter =
             x => (
@@ -40,7 +45,7 @@ public class DepartmentService : IDepartmentService
                 && (!x.IsDeleted)
             );
 
-        IEnumerable<Department> departments = await _departmentRepository.GetAllAsync(expressionFilter, includes);
+        IEnumerable<Department> departments = await _departmentRepository.GetAllAsync(expressionFilter);
         return _mapper.Map<IEnumerable<DepartmentDto>>(departments);
     }
 
@@ -61,12 +66,6 @@ public class DepartmentService : IDepartmentService
             throw new DepartmentAlreadyExistsException();
 
         department.Update(entity.Name);
-
         return _mapper.Map<DepartmentDto>(await _departmentRepository.UpdateAsync(department));
-    }
-
-    public async Task<bool> CheckIfExists(DepartmentFilter filter)
-    {
-        return await _departmentRepository.CheckIfExists(x => x.Name.Equals(filter.Name));
     }
 }

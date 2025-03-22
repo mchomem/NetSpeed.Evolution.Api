@@ -1,18 +1,10 @@
 ﻿use NetSpeedEvolution
 go
 
-insert into Department([name])
-values
- ('Administrativo')
-, ('Comercial')
-, ('Desenvolvimento')
-, ('Financeiro')
-, ('Fiscal-Contábil')
-, ('Folha de Pagamento')
-, ('Infraestrutura')
-, ('Portal Educação')
-, ('RH')
-, ('TI interna')
+delete from HardSkill
+go
+
+dbcc checkident('HardSkill', reseed, 0)
 go
 
 insert into HardSkill ([Name])
@@ -107,12 +99,4 @@ values
 ('Windows Forms'),
 ('XAML'),
 ('XML');
-go
-
-insert into JobTitle([Name])
-values
-('Gerente de Projetos')
-, ('Analista de Sistemas')
-, ('Desenvolvedor')
-, ('Analista de Testes')
 go

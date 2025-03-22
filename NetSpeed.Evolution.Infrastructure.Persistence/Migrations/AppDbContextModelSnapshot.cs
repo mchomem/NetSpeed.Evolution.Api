@@ -61,7 +61,7 @@ namespace NetSpeed.Evolution.Infrastructure.Persistence.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(100)");
 
                     b.Property<bool>("IsDeleted")
                         .ValueGeneratedOnAdd()
@@ -90,7 +90,30 @@ namespace NetSpeed.Evolution.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("ManagerId");
 
+                    b.HasIndex("RegistrationNumber")
+                        .IsUnique()
+                        .HasDatabaseName("UK_Employee_RegistrationNumber");
+
                     b.ToTable("Employee", (string)null);
+                });
+
+            modelBuilder.Entity("NetSpeed.Evolution.Core.Domain.Entities.EmployeeHardSkill", b =>
+                {
+                    b.Property<long>("EmployeeId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("HardSkillId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Level")
+                        .IsRequired()
+                        .HasColumnType("varchar(15)");
+
+                    b.HasKey("EmployeeId", "HardSkillId");
+
+                    b.HasIndex("HardSkillId");
+
+                    b.ToTable("EmployeeHardSkills", (string)null);
                 });
 
             modelBuilder.Entity("NetSpeed.Evolution.Core.Domain.Entities.HardSkill", b =>
@@ -174,6 +197,27 @@ namespace NetSpeed.Evolution.Infrastructure.Persistence.Migrations
                     b.Navigation("Manager");
                 });
 
+            modelBuilder.Entity("NetSpeed.Evolution.Core.Domain.Entities.EmployeeHardSkill", b =>
+                {
+                    b.HasOne("NetSpeed.Evolution.Core.Domain.Entities.Employee", "Employee")
+                        .WithMany("EmployeeHardSkills")
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired()
+                        .HasConstraintName("FK_EmployeeHardSkills_Employee_EmployeeId");
+
+                    b.HasOne("NetSpeed.Evolution.Core.Domain.Entities.HardSkill", "HardSkill")
+                        .WithMany("EmployeeHardSkills")
+                        .HasForeignKey("HardSkillId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired()
+                        .HasConstraintName("FK_EmployeeHardSkills_HardSkill_HardSkillId");
+
+                    b.Navigation("Employee");
+
+                    b.Navigation("HardSkill");
+                });
+
             modelBuilder.Entity("NetSpeed.Evolution.Core.Domain.Entities.Department", b =>
                 {
                     b.Navigation("Employees");
@@ -181,7 +225,14 @@ namespace NetSpeed.Evolution.Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("NetSpeed.Evolution.Core.Domain.Entities.Employee", b =>
                 {
+                    b.Navigation("EmployeeHardSkills");
+
                     b.Navigation("Subordinates");
+                });
+
+            modelBuilder.Entity("NetSpeed.Evolution.Core.Domain.Entities.HardSkill", b =>
+                {
+                    b.Navigation("EmployeeHardSkills");
                 });
 
             modelBuilder.Entity("NetSpeed.Evolution.Core.Domain.Entities.JobTitle", b =>

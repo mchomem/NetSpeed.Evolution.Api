@@ -19,6 +19,11 @@ public class EmployeeMapping : IEntityTypeConfiguration<Employee>
             .IsRequired();
 
         builder
+            .Property(x => x.Email)
+            .HasColumnType("varchar(100)")
+            .IsRequired();
+
+        builder
             .Property(x => x.RegistrationNumber)
             .HasColumnType("varchar(15)")
             .IsRequired();
@@ -40,6 +45,11 @@ public class EmployeeMapping : IEntityTypeConfiguration<Employee>
             .HasColumnType("bit")
             .HasDefaultValueSql("0")
             .IsRequired();
+
+        builder
+            .HasIndex(x => x.RegistrationNumber)
+            .IsUnique()
+            .HasDatabaseName("UK_Employee_RegistrationNumber");
 
         #region Foreign key to table.
 

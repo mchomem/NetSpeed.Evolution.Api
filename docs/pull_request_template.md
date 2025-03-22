@@ -8,7 +8,8 @@
 ## Pull Request
 
 - [ ] The PR(Pull Request) is not large.
-- [ ] The description of the PR(Pull Request) is in accordance with what the code executes. - [ ] The commits have the message in the specified standard ([link]( https://www.conventionalcommits.org/en/v1.0.0/))
+- [ ] The description of the PR(Pull Request) is in accordance with what the code executes.
+- [ ] The commits have the message in the specified standard ([link]( https://www.conventionalcommits.org/en/v1.0.0/))
 
 ## Implementation
 

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35825.156 d17.13
+VisualStudioVersion = 17.13.35825.156
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0 - Tests", "0 - Tests", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
@@ -21,7 +21,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetSpeed.Evolution.Infrastr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetSpeed.Evolution.Infrastructure.IoC", "NetSpeed.Evolution.Infrastructure.IoC\NetSpeed.Evolution.Infrastructure.IoC.csproj", "{053D4A37-00EA-411C-8A45-EEA2449E4D37}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetSpeed.Evolution.Tests", "NetSpeed.Evolution.Tests\NetSpeed.Evolution.Tests.csproj", "{9E365B4E-56DA-4FAE-A6C6-D8E2439B9630}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetSpeed.Evolution.UnitTests", "NetSpeed.Evolution.UnitTests\NetSpeed.Evolution.UnitTests.csproj", "{9E365B4E-56DA-4FAE-A6C6-D8E2439B9630}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetSpeed.Evolution.IntegrationTests", "NetSpeed.Evolution.IntegrationTests\NetSpeed.Evolution.IntegrationTests.csproj", "{A5D630F1-AC3F-40D1-BFDB-1FECDC6F1A87}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +55,10 @@ Global
 		{9E365B4E-56DA-4FAE-A6C6-D8E2439B9630}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E365B4E-56DA-4FAE-A6C6-D8E2439B9630}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E365B4E-56DA-4FAE-A6C6-D8E2439B9630}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5D630F1-AC3F-40D1-BFDB-1FECDC6F1A87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5D630F1-AC3F-40D1-BFDB-1FECDC6F1A87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5D630F1-AC3F-40D1-BFDB-1FECDC6F1A87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5D630F1-AC3F-40D1-BFDB-1FECDC6F1A87}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,6 +70,7 @@ Global
 		{BFC077DC-374A-4F5E-9F40-D9D206C55495} = {0D79CC7D-937F-434E-9227-A12C900B41CD}
 		{053D4A37-00EA-411C-8A45-EEA2449E4D37} = {0D79CC7D-937F-434E-9227-A12C900B41CD}
 		{9E365B4E-56DA-4FAE-A6C6-D8E2439B9630} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{A5D630F1-AC3F-40D1-BFDB-1FECDC6F1A87} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7B47C355-E41F-4B30-8571-012D7767AE9E}

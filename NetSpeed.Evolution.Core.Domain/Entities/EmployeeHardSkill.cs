@@ -15,6 +15,11 @@ public class EmployeeHardSkill
     public long HardSkillId { get; private set; }
     public HardSkillLevel Level { get; private set; }
 
+    public void Update(HardSkillLevel level)
+    {
+        Level = level;
+    }
+
     #region Navigation Properties
 
     public Employee Employee { get; private set; }

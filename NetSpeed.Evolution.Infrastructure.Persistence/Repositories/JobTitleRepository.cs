@@ -21,7 +21,7 @@ public class JobTitleRepository : IJobTitleRepository
         return jobTitle;
     }
 
-    public async Task<IEnumerable<JobTitle>> GetAllAsync(Expression<Func<JobTitle, bool>> filter, IEnumerable<string>? includes = null)
+    public async Task<IEnumerable<JobTitle>> GetAllAsync(Expression<Func<JobTitle, bool>> filter, IEnumerable<Expression<Func<JobTitle, object>>>? includes = null)
     {
         var jobTitles = await _repositoryBase.GetAllAsync(filter, includes);
         return jobTitles;
