@@ -86,6 +86,9 @@ public class SwotService : ISwotService
         if(cycle is null)
             throw new CycleNotFoundException();
 
+        if (!cycle.Active)
+            throw new CycleInactiveException();
+
         swot.Update(entity.EmployeeId, entity.UpdatedById, entity.Status);
 
         return _mapper.Map<SwotDto>(await _swotRepository.UpdateAsync(swot));
