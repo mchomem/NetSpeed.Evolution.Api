@@ -4,7 +4,7 @@ public class Employee : BaseEntity
 {
     private Employee() { }
 
-    public Employee(string name, string email, string registrationNumber, long? managerId, long jobTitleId, long departmentId)
+    public Employee(long id, string name, string email, string registrationNumber, long? managerId, long jobTitleId, long departmentId)
     {
         Name = name;
         Email = email;
