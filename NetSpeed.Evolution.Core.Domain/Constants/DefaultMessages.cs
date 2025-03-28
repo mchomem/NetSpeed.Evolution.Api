@@ -2,25 +2,33 @@
 
 public class DefaultMessages
 {
-    public const string UserPasswordInsufficientLength = "User password of insufficient length";
-    public const string UserPasswordWithoutLetters = "User password without letters";
-    public const string UserPasswordWithoutNumbers = "User password without numbers";
+    public const string UserNotFound = "Usuário não encontrado";
+    public const string UserAlreadyExists = "Login de usuário já existe";
+    public const string UserPasswordInsufficientLength = "Senha do usuário com tamanho insuficiente";
+    public const string UserPasswordWithoutLetters = "A senha precisa conter letras";
+    public const string UserPasswordWithoutNumbers = "A senha precisa conter números";
 
-    public const string JobTitleNotFound = "Job title not found";
-    public const string JobTitleAlreadyExists = "Job title already exists";
-    public const string JobTitleDeletedRecordHandling = "Job title is already deleted";
+    public const string JobTitleNotFound = "Cargo não encontrado";
+    public const string JobTitleAlreadyExists = "O cargo já existe";
+    public const string JobTitleDeletedRecordHandling = "Cargo já foi excluído";
 
-    public const string DepartmentNotFound = "Department not found.";
-    public const string DepartmentAlreadyExists = "Department already exists";
-    public const string DepartmentDeletedRecordHandling = "Department is already deleted";
+    public const string DepartmentNotFound = "Departamento não encontrado";
+    public const string DepartmentAlreadyExists = "Departmento já existe";
+    public const string DepartmentDeletedRecordHandling = "Departmento já foi excluído";
     
-    public const string HardSkillNotFound = "HardSkill not found";
-    public const string HardSkillAlreadyExists = "Hard skill already exists";
-    public const string HardSkillDeletedRecordHandling = "Hard skill is already deleted";
+    public const string HardSkillNotFound = "Hard Skill não encontrado";
+    public const string HardSkillAlreadyExists = "Hard skill já existe";
+    public const string HardSkillDeletedRecordHandling = "Hard skill já foi excluído";
 
-    public const string EmployeeNotFound = "Employee not found";
-    public const string EmployeeAlreadyExists = "Employee already exists";
+    public const string EmployeeNotFound = "Colaborador não encontrado";
+    public const string EmployeeAlreadyExists = "Colaborador já existe";
 
-    public const string EmployeeHardSkillNotFound = "Employee hard skill not found";
-    public const string EmployeeHardSkillAlreadyExists = "Employee hard skill already exists";
+    public const string EmployeeHardSkillNotFound = "Hard skill de colaobrador não encontrado";
+    public const string EmployeeHardSkillAlreadyExists = "Hard skill Employee já existe";
+
+    public const string SwotNotFound = "Swot não encontrado";
+    public const string SwotAlreadyExists = "Swot já existe";
+
+    public const string CycleNotFound = "Ciclo não encontrado";
+    public const string CycleAlreadyExists = "Ciclo já existe";
 }

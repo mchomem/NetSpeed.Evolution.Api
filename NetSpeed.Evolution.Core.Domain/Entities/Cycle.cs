@@ -27,4 +27,10 @@ public class Cycle : BaseEntity
         Active = false;
         UpdatedAt = DateTime.UtcNow;
     }
+
+    #region Navigation Properties
+
+    public ICollection<Swot> Swots { get; private set; }
+
+    #endregion
 }

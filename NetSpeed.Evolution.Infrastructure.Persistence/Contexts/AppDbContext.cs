@@ -7,6 +7,13 @@ public class AppDbContext : DbContext
     public DbSet<HardSkill> HardSkill { get; set; }
     public DbSet<Employee> Employee { get; set; }
     public DbSet<EmployeeHardSkill> EmployeeHardSkill { get; set; }
+    public DbSet<Swot> Swot { get; set; }
+    public DbSet<Strength> Strength { get; set; }
+    public DbSet<Opportunity> Opportunity { get; set; }
+    public DbSet<Weakness> Weakness { get; set; }
+    public DbSet<Threat> Threat { get; set; }
+    public DbSet<User> User { get; set; }
+    public DbSet<Cycle> Cycle { get; set; }
 
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 

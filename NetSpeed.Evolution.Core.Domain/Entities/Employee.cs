@@ -46,9 +46,13 @@ public class Employee : BaseEntity
 
     public Department Department { get; private set; }
 
+    public User User { get; private set; }
+
     public ICollection<Employee> Subordinates { get; private set; }
 
     public ICollection<EmployeeHardSkill> EmployeeHardSkills { get; private set; }
+
+    public ICollection<Swot> Swots { get; private set; }
 
     #endregion
 }

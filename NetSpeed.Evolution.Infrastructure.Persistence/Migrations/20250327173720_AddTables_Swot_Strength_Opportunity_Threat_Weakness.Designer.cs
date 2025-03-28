@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NetSpeed.Evolution.Infrastructure.Persistence.Contexts;
 
@@ -11,9 +12,11 @@ using NetSpeed.Evolution.Infrastructure.Persistence.Contexts;
 namespace NetSpeed.Evolution.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250327173720_AddTables_Swot_Strength_Opportunity_Threat_Weakness")]
+    partial class AddTables_Swot_Strength_Opportunity_Threat_Weakness
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,37 +24,6 @@ namespace NetSpeed.Evolution.Infrastructure.Persistence.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("NetSpeed.Evolution.Core.Domain.Entities.Cycle", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
-
-                    b.Property<bool>("Active")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValueSql("0");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime");
-
-                    b.Property<int>("Year")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Year")
-                        .IsUnique()
-                        .HasDatabaseName("UK_Cycle_Year");
-
-                    b.ToTable("Cycle", (string)null);
-                });
 
             modelBuilder.Entity("NetSpeed.Evolution.Core.Domain.Entities.Department", b =>
                 {
@@ -255,12 +227,9 @@ namespace NetSpeed.Evolution.Infrastructure.Persistence.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime2");
 
                     b.Property<long>("CreatedById")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("CycleId")
                         .HasColumnType("bigint");
 
                     b.Property<long>("EmployeeId")
@@ -271,7 +240,7 @@ namespace NetSpeed.Evolution.Infrastructure.Persistence.Migrations
                         .HasColumnType("varchar(20)");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime2");
 
                     b.Property<long?>("UpdatedById")
                         .HasColumnType("bigint");
@@ -279,8 +248,6 @@ namespace NetSpeed.Evolution.Infrastructure.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CreatedById");
-
-                    b.HasIndex("CycleId");
 
                     b.HasIndex("EmployeeId");
 
@@ -336,10 +303,6 @@ namespace NetSpeed.Evolution.Infrastructure.Persistence.Migrations
                         .HasColumnType("varchar(100)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("Login")
-                        .IsUnique()
-                        .HasDatabaseName("UK_User_Login");
 
                     b.ToTable("User", (string)null);
                 });
@@ -461,13 +424,6 @@ namespace NetSpeed.Evolution.Infrastructure.Persistence.Migrations
                         .IsRequired()
                         .HasConstraintName("FK_Swot_User_CreatedById");
 
-                    b.HasOne("NetSpeed.Evolution.Core.Domain.Entities.Cycle", "Cycle")
-                        .WithMany("Swots")
-                        .HasForeignKey("CycleId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired()
-                        .HasConstraintName("FK_Swot_Cycle_CycleId");
-
                     b.HasOne("NetSpeed.Evolution.Core.Domain.Entities.Employee", "Employee")
                         .WithMany("Swots")
                         .HasForeignKey("EmployeeId")
@@ -482,8 +438,6 @@ namespace NetSpeed.Evolution.Infrastructure.Persistence.Migrations
                         .HasConstraintName("FK_Swot_User_UpdatedById");
 
                     b.Navigation("CreatedBy");
-
-                    b.Navigation("Cycle");
 
                     b.Navigation("Employee");
 
@@ -512,11 +466,6 @@ namespace NetSpeed.Evolution.Infrastructure.Persistence.Migrations
                         .HasConstraintName("FK_Weakness_Swot_SwotId");
 
                     b.Navigation("Swot");
-                });
-
-            modelBuilder.Entity("NetSpeed.Evolution.Core.Domain.Entities.Cycle", b =>
-                {
-                    b.Navigation("Swots");
                 });
 
             modelBuilder.Entity("NetSpeed.Evolution.Core.Domain.Entities.Department", b =>

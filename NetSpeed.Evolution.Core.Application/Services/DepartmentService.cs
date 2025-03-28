@@ -57,7 +57,7 @@ public class DepartmentService : IDepartmentService
 
     public async Task<DepartmentDto> UpdateAsync(long id, DepartmentUpdateDto entity)
     {
-        var department = await _departmentRepository.GetAsync(entity.Id);
+        var department = await _departmentRepository.GetAsync(id);
 
         if (department is null)
             throw new DepartmentNotFoundException();

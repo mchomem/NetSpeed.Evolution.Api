@@ -43,5 +43,45 @@ public class ProfileMapping : Profile
         CreateMap<EmployeeHardSkill, EmployeeHardSkillUpdateDto>().ReverseMap();
 
         #endregion
+
+        #region Swot
+
+        CreateMap<Swot, SwotDto>().ReverseMap();
+        CreateMap<Swot, SwotInsertDto>().ReverseMap();
+        CreateMap<Swot, SwotUpdateDto>().ReverseMap();
+
+        #endregion
+
+        #region Strength
+
+        CreateMap<Strength, StrengthDto>().ReverseMap();
+
+        #endregion
+
+        #region Opportunity
+
+        CreateMap<Opportunity, OpportunityDto>().ReverseMap();
+
+        #endregion
+
+        #region Weakness
+
+        CreateMap<Weakness, WeaknessDto>().ReverseMap();
+
+        #endregion
+
+        #region Threat
+
+        CreateMap<Threat, ThreatDto>().ReverseMap();
+
+        #endregion
+
+        #region Cycle
+
+        CreateMap<Cycle, CycleDto>().ReverseMap();
+        CreateMap<Cycle, CycleInsertDto>().ReverseMap();
+        CreateMap<Cycle, CycleUpdateDto>().ReverseMap();
+
+        #endregion
     }
 }
