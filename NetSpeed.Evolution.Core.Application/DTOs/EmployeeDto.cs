@@ -17,6 +17,7 @@ public class EmployeeDto
 
 public class EmployeeInsertDto
 {
+    public long Id { get; set; }
     public string Name { get; set; }
     public string Email { get; set; }
     public string RegistrationNumber { get; set; }
