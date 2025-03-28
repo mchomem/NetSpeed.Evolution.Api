@@ -72,6 +72,7 @@ public class SwotService : ISwotService
         var swot = await _swotRepository.GetAsync(id);
         var employee = await _employeeRepository.GetAsync(entity.EmployeeId);
         var updateUser = await _userRepository.GetAsync(entity.UpdatedById);
+        var cycle = await _cycleRepository.GetAsync(entity.CycleId);
 
         if (swot is null)
             throw new SwotNotFoundException();
@@ -81,9 +82,9 @@ public class SwotService : ISwotService
 
         if (updateUser is null)
             throw new UserNotFoundException("O usuário de atualização do registro não existe");
-        
-        if (await _swotRepository.CheckIfExists(x => x.EmployeeId == entity.EmployeeId && x.CycleId == entity.CycleId))
-            throw new SwotAlreadyExistsException();
+
+        if(cycle is null)
+            throw new CycleNotFoundException();
 
         swot.Update(entity.EmployeeId, entity.UpdatedById, entity.Status);
 
