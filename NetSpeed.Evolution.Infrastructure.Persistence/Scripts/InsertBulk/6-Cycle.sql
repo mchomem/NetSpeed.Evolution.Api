@@ -7,5 +7,5 @@ go
 dbcc checkident('Cycle', ressed, 0)
 go
 
-insert into Cycle([Year], CreatedAt) values(year(getdate()), getdate())
+insert into Cycle([Year], [Active], CreatedAt) values(year(getdate()), 1, getdate())
 go

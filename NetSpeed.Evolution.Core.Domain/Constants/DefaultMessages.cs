@@ -31,4 +31,6 @@ public class DefaultMessages
 
     public const string CycleNotFound = "Ciclo não encontrado";
     public const string CycleAlreadyExists = "Ciclo já existe";
+    public const string CycleInactive = "Ciclo inativo";
+
 }

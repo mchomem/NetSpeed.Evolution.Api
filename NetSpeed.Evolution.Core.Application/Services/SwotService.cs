@@ -4,13 +4,15 @@ public class SwotService : ISwotService
 {
     private readonly ISwotRepository _swotRepository;
     private readonly IEmployeeRepository _employeeRepository;
+    private readonly ICycleRepository _cycleRepository;
     private readonly IUserRepository _userRepository;
     private readonly IMapper _mapper;
 
-    public SwotService(ISwotRepository swotRepository, IEmployeeRepository employeeRepository, IUserRepository userRepository, IMapper mapper)
+    public SwotService(ISwotRepository swotRepository, IEmployeeRepository employeeRepository, ICycleRepository cycleRepository, IUserRepository userRepository, IMapper mapper)
     {
         _swotRepository = swotRepository;
         _employeeRepository = employeeRepository;
+        _cycleRepository = cycleRepository;
         _userRepository = userRepository;
         _mapper = mapper;
     }
@@ -23,8 +25,24 @@ public class SwotService : ISwotService
 
     public async Task<SwotDto> CreateAsync(SwotInsertDto entity)
     {
-        if (await CheckIfExists(new SwotFilter() { EmployeeId = entity.EmployeeId }))
+        if (await CheckIfExists(new SwotFilter() { EmployeeId = entity.EmployeeId, CycleId = entity.CycleId }))
             throw new SwotAlreadyExistsException();
+
+        var cycle = await _cycleRepository.GetAsync(entity.CycleId);
+        var createdUser = await _userRepository.GetAsync(entity.CreatedById);
+        var employee = await _employeeRepository.GetAsync(entity.EmployeeId);
+
+        if (cycle is null)
+            throw new CycleNotFoundException();
+
+        if (!cycle.Active)
+            throw new CycleInactiveException();
+
+        if (createdUser is null)
+            throw new UserNotFoundException("O usuário de criação do registro não existe");
+
+        if(employee is null)
+            throw new EmployeeNotFoundException();
 
         var strengths = _mapper.Map<IEnumerable<Strength>>(entity.Strengths).ToList();
         var opportunities = _mapper.Map<IEnumerable<Opportunity>>(entity.Opportunities).ToList();
@@ -62,7 +80,7 @@ public class SwotService : ISwotService
             throw new SwotNotFoundException();
 
         if (updateUser is null)
-            throw new UserNotFoundException("O usuário de atualização do registro não foi existe");
+            throw new UserNotFoundException("O usuário de atualização do registro não existe");
         
         if (await _swotRepository.CheckIfExists(x => x.EmployeeId == entity.EmployeeId && x.CycleId == entity.CycleId))
             throw new SwotAlreadyExistsException();
