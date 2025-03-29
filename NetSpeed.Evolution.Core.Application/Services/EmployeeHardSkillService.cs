@@ -1,4 +1,6 @@
-﻿namespace NetSpeed.Evolution.Core.Application.Services;
+﻿using NetSpeed.Evolution.Core.Domain.Entities;
+
+namespace NetSpeed.Evolution.Core.Application.Services;
 
 public class EmployeeHardSkillService : IEmployeeHardSkillService
 {
@@ -67,6 +69,11 @@ public class EmployeeHardSkillService : IEmployeeHardSkillService
         };
 
         IEnumerable<EmployeeHardSkill> employeeHardSkills = await _employeeHardSkillRepository.GetAllAsync(expressionFilter, includes);
+
+
+        if(employeeHardSkills is null)
+            throw new EmployeeHardSkillNotFoundException();
+
         return _mapper.Map<IEnumerable<EmployeeHardSkillDto>>(employeeHardSkills);
     }
 
@@ -77,6 +84,10 @@ public class EmployeeHardSkillService : IEmployeeHardSkillService
             x => x.Employee, x => x.HardSkill
         };
         var employeeHardSkill = await _employeeHardSkillRepository.GetAsync(x => x.EmployeeId == employeeId && x.HardSkillId == hardSkillId, includes);
+
+        if (employeeHardSkill is null)
+            throw new EmployeeHardSkillNotFoundException();
+
         return _mapper.Map<EmployeeHardSkillDto>(employeeHardSkill);
     }
 

@@ -15,10 +15,6 @@ public class JobTitleController : ControllerBase
     public async Task<IActionResult> GetAllAsync([FromQuery] JobTitleFilter filter)
     {
         var jobTitle = await _jobTitleService.GetAllAsync(filter);
-
-        if (!jobTitle.Any())
-            return NotFound(new ApiResponse<IEnumerable<JobTitleDto>>(null!, DefaultMessages.JobTitleNotFound));
-
         return Ok(new ApiResponse<IEnumerable<JobTitleDto>>(jobTitle));
     }
 
@@ -26,10 +22,6 @@ public class JobTitleController : ControllerBase
     public async Task<IActionResult> GetAsync([FromRoute] long id)
     {
         var jobTitle = await _jobTitleService.GetAsync(id);
-
-        if (jobTitle is null)
-            return NotFound(new ApiResponse<IEnumerable<JobTitleDto>>(null!, DefaultMessages.JobTitleNotFound));
-
         return Ok(new ApiResponse<JobTitleDto>(jobTitle));
     }
 

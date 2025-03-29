@@ -1,10 +1,13 @@
 delete from Employee
 go
 
-delete from Employee
+delete from [User]
 go
 
-dbcc checkident ('Employee', RESEED, 0);
+dbcc checkident ('User', RESEED, 0);
+go
+
+delete from Employee
 go
 
 declare @maxRecords int = 50
@@ -101,8 +104,8 @@ select [name] from @tempFirstPersonNames
 
 while(@maxRecords > 0)
 begin
-set @maxRecords = @maxRecords - 1
-set @index = @index + 1
+	set @maxRecords = @maxRecords - 1
+	set @index = @index + 1
 
 	declare @firstName varchar(15) = (select [name] from @tempFirstPersonNames where id = floor( (rand() * (select count(*) from @tempFirstPersonNames)) + 1))
 	declare @lastName varchar(15) = (select [name] from @tempThirdPersonNames where id = floor( (rand() * (select count(*) from @tempThirdPersonNames)) + 1))
@@ -123,9 +126,35 @@ set @index = @index + 1
 		set @registrationNumber = @registrationNumber + cast(  (floor(rand() * 14) + 1) as varchar(15) ) 
 	end
 
+	declare @login varchar(30) = lower(@firstName) + '.' + lower(@lastName) + concat('_', floor(rand() * 10), floor(rand() * 10))
+	declare @password varchar(100) = 'user@netspeed'
+
+	-- Verifica se já existe o login de usuário.
+	if exists(select * from [User] where [Login] = @login)
+	begin
+		-- Desfaz as contagens de linhas inseridas e valores de indice para inserção.
+		set @maxRecords = @maxRecords + 1
+		set @index = @index - 1
+		continue
+	end		
+
+	insert into [User]
+	(
+		[Login]
+		, [Password]
+	)
+	values
+	(
+		@login
+		, @password
+	)
+
+	declare @idEmployeeUser bigint = SCOPE_IDENTITY()
+
 	insert into [dbo].[Employee]
     (
-		[Name]
+		[Id]
+		, [Name]
 		, [Email]
 		, [RegistrationNumber]
 		, [JobTitleId]
@@ -134,7 +163,8 @@ set @index = @index + 1
 	)
      values
     (
-		@fullEmployeeName     --<Name, varchar(100),>
+		@idEmployeeUser       --<Id, bigint>
+		, @fullEmployeeName   --<Name, varchar(100),>
         , @email              --,<Email, varchar(100),>
         , @registrationNumber --,<RegistrationNumber, varchar(15),>
         , @jobTitleId         --,<JobTitleId, bigint,>
@@ -144,6 +174,7 @@ set @index = @index + 1
 end
 go
 
+-- Set 2 random managers.
 declare @Manager1 int, @Manager2 int
 
 with RandomManagers as (
@@ -160,6 +191,6 @@ set ManagerId = case
 end
 where Id NOT IN (@Manager1, @Manager2);
 
-
+select * from [User]
 select * from Employee
 go

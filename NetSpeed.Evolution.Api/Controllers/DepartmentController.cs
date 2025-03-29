@@ -15,10 +15,6 @@ public class DepartmentController : ControllerBase
     public async Task<IActionResult> GetAllAsync([FromQuery] DepartmentFilter filter)
     {
         var departments  = await _departmentService.GetAllAsync(filter);
-
-        if (!departments.Any())
-            return NotFound(new ApiResponse<IEnumerable<DepartmentDto>>(null!, DefaultMessages.DepartmentNotFound));
-
         return Ok(new ApiResponse<IEnumerable<DepartmentDto>>(departments));
     }
 
@@ -26,10 +22,6 @@ public class DepartmentController : ControllerBase
     public async Task<IActionResult> GetAsync([FromRoute] long id)
     {
         var department = await _departmentService.GetAsync(id);
-
-        if (department is null)
-            return NotFound(new ApiResponse<IEnumerable<DepartmentDto>>(null!, DefaultMessages.DepartmentNotFound));
-
         return Ok(new ApiResponse<DepartmentDto>(department));
     }
 

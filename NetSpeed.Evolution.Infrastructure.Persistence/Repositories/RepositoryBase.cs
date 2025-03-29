@@ -2,32 +2,46 @@
 
 public class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity : class
 {
-    private readonly DbSet<TEntity> _DbSet;
-    private readonly AppDbContext _AppDbContext;
+    private readonly DbSet<TEntity> _dbSet;
+    private readonly AppDbContext _appDbContext;
 
     public RepositoryBase(AppDbContext appDbContext)
     {
-        _DbSet = appDbContext.Set<TEntity>();
-        _AppDbContext = appDbContext;
+        _dbSet = appDbContext.Set<TEntity>();
+        _appDbContext = appDbContext;
     }
 
     public async Task<TEntity> CreateAsync(TEntity entity)
     {
-        await _DbSet.AddAsync(entity);
-        await _AppDbContext.SaveChangesAsync();
-        return _AppDbContext.Entry(entity).Entity;
+        await _dbSet.AddAsync(entity);
+        await _appDbContext.SaveChangesAsync();
+        return _appDbContext.Entry(entity).Entity;
+    }
+
+    public async Task<IEnumerable<TEntity>> CreateManyAsync(IEnumerable<TEntity> entities)
+    {
+        await _dbSet.AddRangeAsync(entities);
+        await _appDbContext.SaveChangesAsync();
+        return  _appDbContext.Entry(entities).Entity;
     }
 
     public async Task<TEntity> DeleteAsync(TEntity entity)
     {
-        _DbSet.Remove(entity);
-        await _AppDbContext.SaveChangesAsync();
-        return _AppDbContext.Entry(entity).Entity;
+        _dbSet.Remove(entity);
+        await _appDbContext.SaveChangesAsync();
+        return _appDbContext.Entry(entity).Entity;
+    }
+
+    public async Task<IEnumerable<TEntity>> DeleteManyAsync(IEnumerable<TEntity> entities)
+    {
+        _dbSet.RemoveRange(entities);
+        await _appDbContext.SaveChangesAsync();
+        return _appDbContext.Entry(entities).Entity;
     }
 
     public async Task<IEnumerable<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> filter, IEnumerable<Expression<Func<TEntity, object>>>? includes = null)
     {
-        IQueryable<TEntity> query = _DbSet
+        IQueryable<TEntity> query = _dbSet
             .AsQueryable()
             .AsNoTracking()
             .Where(filter);
@@ -43,13 +57,13 @@ public class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity : 
 
     public async Task<TEntity> GetAsync(long id)
     {
-        var entity = await _DbSet.FindAsync(id);
+        var entity = await _dbSet.FindAsync(id);
         return entity!;
     }
 
     public async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> filter, IEnumerable<Expression<Func<TEntity, object>>>? includes = null)
     {
-        IQueryable<TEntity> query = _DbSet
+        IQueryable<TEntity> query = _dbSet
             .AsQueryable()
             .Where(filter)
             .AsNoTracking();
@@ -66,14 +80,14 @@ public class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity : 
 
     public async Task<TEntity> UpdateAsync(TEntity entity)
     {
-        _DbSet.Update(entity);
-        await _AppDbContext.SaveChangesAsync();
-        return _AppDbContext.Entry(entity).Entity;
+        _dbSet.Update(entity);
+        await _appDbContext.SaveChangesAsync();
+        return _appDbContext.Entry(entity).Entity;
     }
 
     public async Task<bool> CheckIfExists(Expression<Func<TEntity, bool>> filter)
     {
-        IQueryable<TEntity> query = _DbSet
+        IQueryable<TEntity> query = _dbSet
             .AsQueryable()
             .Where(filter)
             .AsNoTracking();

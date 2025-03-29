@@ -47,12 +47,20 @@ public class HardSkillService : IHardSkillService
             );
 
         IEnumerable<HardSkill> hardSkills = await _hardSkillRepository.GetAllAsync(expressionFilter);
+
+        if (hardSkills is null)
+            throw new HardSkillNotFoundException();
+
         return _mapper.Map<IEnumerable<HardSkillDto>>(hardSkills);
     }
 
     public async Task<HardSkillDto> GetAsync(long id)
     {
         var hardSkill = await _hardSkillRepository.GetAsync(id);
+
+        if (hardSkill is null)
+            throw new HardSkillNotFoundException();
+
         return _mapper.Map<HardSkillDto>(hardSkill);
     }
 
