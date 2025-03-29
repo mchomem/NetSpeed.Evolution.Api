@@ -38,12 +38,16 @@ public class Swot : BaseEntity
 
     #endregion
 
-    public void Update(long employeeId, long updatedById, SwotStatus status)
+    public void Update(long employeeId, long updatedById, SwotStatus status, ICollection<Strength> strengths, ICollection<Opportunity> opportunities, ICollection<Weakness> weaknesses, ICollection<Threat> threats)
     {
         EmployeeId = employeeId;
         UpdatedById = updatedById;
         UpdatedAt = DateTime.UtcNow;
         Status = status;
+        Strengths = strengths;
+        Opportunities = opportunities;
+        Weaknesses = weaknesses;
+        Threats = threats;
     }
 
     public void Completed()

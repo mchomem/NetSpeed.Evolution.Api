@@ -102,7 +102,6 @@ public class SwotService : ISwotService
         var swot = await _swotRepository.GetAsync(id);
         var employee = await _employeeRepository.GetAsync(entity.EmployeeId);
         var updateUser = await _userRepository.GetAsync(entity.UpdatedById);
-        var cycle = await _cycleRepository.GetAsync(entity.CycleId);
 
         if (swot is null)
             throw new SwotNotFoundException();
@@ -113,13 +112,12 @@ public class SwotService : ISwotService
         if (updateUser is null)
             throw new UserNotFoundException("O usuário de atualização do registro não existe");
 
-        if(cycle is null)
-            throw new CycleNotFoundException();
+        var strengths = _mapper.Map<IEnumerable<Strength>>(entity.Strengths).ToList();
+        var opportunities = _mapper.Map<IEnumerable<Opportunity>>(entity.Opportunities).ToList();
+        var weaknesses = _mapper.Map<IEnumerable<Weakness>>(entity.Weaknesses).ToList();
+        var threats = _mapper.Map<IEnumerable<Threat>>(entity.Threats).ToList();
 
-        if (!cycle.Active)
-            throw new CycleInactiveException();
-
-        swot.Update(entity.EmployeeId, entity.UpdatedById, entity.Status);
+        swot.Update(entity.EmployeeId, entity.UpdatedById, entity.Status, strengths, opportunities, weaknesses, threats);
 
         return _mapper.Map<SwotDto>(await _swotRepository.UpdateAsync(swot));
     }

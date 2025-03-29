@@ -4,10 +4,10 @@ public class SwotRepository : ISwotRepository
 {
     private readonly IRepositoryBase<Swot> _repositoryBase;
     private readonly AppDbContext _appDbContext;
-    
+
 
     public SwotRepository(IRepositoryBase<Swot> repositoryBase
-        , AppDbContext appDbContext)        
+        , AppDbContext appDbContext)
     {
         _repositoryBase = repositoryBase;
         _appDbContext = appDbContext;
@@ -65,7 +65,21 @@ public class SwotRepository : ISwotRepository
 
     public async Task<Swot> UpdateAsync(Swot entity)
     {
-        var swot = await _repositoryBase.UpdateAsync(entity);
-        return swot;
+        using var transaction = await _appDbContext.Database.BeginTransactionAsync();
+
+        try
+        {
+            var swot = await _repositoryBase.UpdateAsync(entity);
+
+            await transaction.CommitAsync();
+
+            return swot;
+        }
+        catch (Exception)
+        {
+            await transaction.RollbackAsync();
+
+            throw;
+        }
     }
 }

@@ -14,3 +14,10 @@ public class StrengthInsertDto
     public string Description { get; set; }
     public int Order { get; set; }
 }
+
+public class StrengthUpdateDto
+{
+    public long SwotId { get; set; }
+    public string Description { get; set; }
+    public int Order { get; set; }
+}

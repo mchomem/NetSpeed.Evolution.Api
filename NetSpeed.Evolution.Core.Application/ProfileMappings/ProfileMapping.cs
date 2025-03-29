@@ -56,6 +56,7 @@ public class ProfileMapping : Profile
 
         CreateMap<Strength, StrengthDto>().ReverseMap();
         CreateMap<Strength, StrengthInsertDto>().ReverseMap();
+        CreateMap<Strength, StrengthUpdateDto>().ReverseMap();
 
         #endregion
 
@@ -63,6 +64,7 @@ public class ProfileMapping : Profile
 
         CreateMap<Opportunity, OpportunityDto>().ReverseMap();
         CreateMap<Opportunity, OpportunityInsertDto>().ReverseMap();
+        CreateMap<Opportunity, OpportunityUpdateDto>().ReverseMap();
 
         #endregion
 
@@ -70,6 +72,7 @@ public class ProfileMapping : Profile
 
         CreateMap<Weakness, WeaknessDto>().ReverseMap();
         CreateMap<Weakness, WeaknessInsertDto>().ReverseMap();
+        CreateMap<Weakness, WeaknessUpdateDto>().ReverseMap();
 
         #endregion
 
@@ -77,6 +80,7 @@ public class ProfileMapping : Profile
 
         CreateMap<Threat, ThreatDto>().ReverseMap();
         CreateMap<Threat, ThreatInsertDto>().ReverseMap();
+        CreateMap<Threat, ThreatUpdateDto>().ReverseMap();
 
         #endregion
 

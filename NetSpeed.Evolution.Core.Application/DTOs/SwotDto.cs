@@ -37,9 +37,8 @@ public class SwotUpdateDto
     public long EmployeeId { get; set; }
     public long UpdatedById { get; set; }
     public SwotStatus Status { get; set; }
-    public long CycleId { get; set; }
-    public IEnumerable<StrengthDto> Strengths { get; set; }
-    public IEnumerable<OpportunityDto> Opportunities { get; set; }
-    public IEnumerable<WeaknessDto> Weaknesses { get; set; }
-    public IEnumerable<ThreatDto> Threats { get; set; }
+    public IEnumerable<StrengthUpdateDto> Strengths { get; set; }
+    public IEnumerable<OpportunityUpdateDto> Opportunities { get; set; }
+    public IEnumerable<WeaknessUpdateDto> Weaknesses { get; set; }
+    public IEnumerable<ThreatUpdateDto> Threats { get; set; }
 }
