@@ -15,10 +15,6 @@ public class HardSkillController : ControllerBase
     public async Task<IActionResult> GetAllAsync([FromQuery] HardSkillFilter filter)
     {
         var hardSkill = await _hardSkillService.GetAllAsync(filter);
-
-        if (!hardSkill.Any())
-            return NotFound(new ApiResponse<IEnumerable<HardSkillDto>>(null!, DefaultMessages.HardSkillNotFound));
-
         return Ok(new ApiResponse<IEnumerable<HardSkillDto>>(hardSkill));
     }
 
@@ -26,10 +22,6 @@ public class HardSkillController : ControllerBase
     public async Task<IActionResult> GetAsync([FromRoute] long id)
     {
         var hardSkill = await _hardSkillService.GetAsync(id);
-
-        if (hardSkill is null)
-            return NotFound(new ApiResponse<IEnumerable<HardSkillDto>>(null!, DefaultMessages.HardSkillNotFound));
-
         return Ok(new ApiResponse<HardSkillDto>(hardSkill));
     }
 

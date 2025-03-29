@@ -45,6 +45,11 @@ public class SwotMapping : IEntityTypeConfiguration<Swot>
             .Property(x => x.CycleId)
             .IsRequired();
 
+        builder
+            .HasIndex(x => new {x.Id, x.CycleId })
+            .IsUnique()
+            .HasDatabaseName("UK_Swot_Id_CycleId");
+
         #region Foreign key to table.
 
         builder

@@ -74,6 +74,10 @@ public class EmployeeService : IEmployeeService
         };
 
         IEnumerable<Employee> employees = await _employeeRepository.GetAllAsync(expressionFilter, includes);
+
+        if(employees is null)
+            throw new EmployeeNotFoundException();
+
         return _mapper.Map<IEnumerable<EmployeeDto>>(employees);
     }
 

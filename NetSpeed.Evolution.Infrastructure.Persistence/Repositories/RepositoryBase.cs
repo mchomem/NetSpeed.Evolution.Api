@@ -32,6 +32,13 @@ public class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity : 
         return _appDbContext.Entry(entity).Entity;
     }
 
+    public async Task<IEnumerable<TEntity>> DeleteManyAsync(IEnumerable<TEntity> entities)
+    {
+        _dbSet.RemoveRange(entities);
+        await _appDbContext.SaveChangesAsync();
+        return _appDbContext.Entry(entities).Entity;
+    }
+
     public async Task<IEnumerable<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> filter, IEnumerable<Expression<Func<TEntity, object>>>? includes = null)
     {
         IQueryable<TEntity> query = _dbSet

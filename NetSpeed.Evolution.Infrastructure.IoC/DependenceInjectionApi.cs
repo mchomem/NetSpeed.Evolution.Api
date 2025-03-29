@@ -25,6 +25,10 @@ public static class DependenceInjectionApi
         services.AddScoped<ISwotRepository, SwotRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<ICycleRepository, CycleRepository>();
+        services.AddScoped<IStrengthRepository, StrengthRepository>();
+        services.AddScoped<IOpportunityRepository, OpportunityRepository>();
+        services.AddScoped<IWeaknessRepository, WeaknessRepository>();
+        services.AddScoped<IThreatRepository, ThreatRepository>();
 
         #endregion
 

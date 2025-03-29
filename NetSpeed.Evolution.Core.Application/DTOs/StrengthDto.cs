@@ -6,5 +6,11 @@ public class StrengthDto
     public long SwotId { get; set; }
     public string Description { get; set; }
     public int Order { get; set; }
-    public SwotDto Swot { get; set; }
+}
+
+public class StrengthInsertDto
+{
+    public long SwotId { get; set; }
+    public string Description { get; set; }
+    public int Order { get; set; }
 }

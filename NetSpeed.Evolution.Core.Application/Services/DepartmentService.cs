@@ -46,12 +46,20 @@ public class DepartmentService : IDepartmentService
             );
 
         IEnumerable<Department> departments = await _departmentRepository.GetAllAsync(expressionFilter);
+
+        if (departments is null)
+            throw new DepartmentNotFoundException();
+
         return _mapper.Map<IEnumerable<DepartmentDto>>(departments);
     }
 
     public async Task<DepartmentDto> GetAsync(long id)
     {
         var department = await _departmentRepository.GetAsync(id);
+
+        if(department is null)
+            throw new DepartmentNotFoundException();
+
         return _mapper.Map<DepartmentDto>(department);
     }
 

@@ -4,8 +4,10 @@ public class SwotRepository : ISwotRepository
 {
     private readonly IRepositoryBase<Swot> _repositoryBase;
     private readonly AppDbContext _appDbContext;
+    
 
-    public SwotRepository(IRepositoryBase<Swot> repositoryBase, AppDbContext appDbContext)
+    public SwotRepository(IRepositoryBase<Swot> repositoryBase
+        , AppDbContext appDbContext)        
     {
         _repositoryBase = repositoryBase;
         _appDbContext = appDbContext;
@@ -24,13 +26,6 @@ public class SwotRepository : ISwotRepository
         try
         {
             var swot = await _repositoryBase.CreateAsync(entity);
-
-            // TODO: trocar por implementações de repositóries isolados (padronização no projeto)
-            await _appDbContext.Strength.AddRangeAsync(entity.Strengths);
-            await _appDbContext.Opportunity.AddRangeAsync(entity.Opportunities);
-            await _appDbContext.Weakness.AddRangeAsync(entity.Weaknesses);
-            await _appDbContext.Threat.AddRangeAsync(entity.Threats);
-            await _appDbContext.SaveChangesAsync();
 
             await transaction.CommitAsync();
 

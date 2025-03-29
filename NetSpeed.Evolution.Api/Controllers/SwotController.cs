@@ -15,10 +15,6 @@ public class SwotController : ControllerBase
     public async Task<IActionResult> GetAsync([FromQuery] long employeeId, [FromQuery] long cycleId)
     {
         var swot = await _swotService.GetAsync(employeeId, cycleId);
-
-        if(swot is null)
-            return NotFound(new ApiResponse<IEnumerable<SwotDto>>(null!, DefaultMessages.SwotNotFound));
-
         return Ok(new ApiResponse<SwotDto>(swot));
     }
 

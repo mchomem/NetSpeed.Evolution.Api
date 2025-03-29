@@ -25,10 +25,10 @@ public class SwotInsertDto
     public long EmployeeId { get; set; }
     public long CreatedById { get; set; }
     public long CycleId { get; set; }
-    public IEnumerable<StrengthDto> Strengths { get; set; }
-    public IEnumerable<OpportunityDto> Opportunities { get; set; }
-    public IEnumerable<WeaknessDto> Weaknesses { get; set; }
-    public IEnumerable<ThreatDto> Threats { get; set; }
+    public IEnumerable<StrengthInsertDto> Strengths { get; set; }
+    public IEnumerable<OpportunityInsertDto> Opportunities { get; set; }
+    public IEnumerable<WeaknessInsertDto> Weaknesses { get; set; }
+    public IEnumerable<ThreatInsertDto> Threats { get; set; }
 }
 
 public class SwotUpdateDto

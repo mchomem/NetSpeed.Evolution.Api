@@ -6,14 +6,30 @@ public class SwotService : ISwotService
     private readonly IEmployeeRepository _employeeRepository;
     private readonly ICycleRepository _cycleRepository;
     private readonly IUserRepository _userRepository;
+    private readonly IStrengthRepository _strengthRepository;
+    private readonly IOpportunityRepository _opportunityRepository;
+    private readonly IWeaknessRepository _weaknessRepository;
+    private readonly IThreatRepository _threatRepository;
     private readonly IMapper _mapper;
 
-    public SwotService(ISwotRepository swotRepository, IEmployeeRepository employeeRepository, ICycleRepository cycleRepository, IUserRepository userRepository, IMapper mapper)
+    public SwotService(ISwotRepository swotRepository
+        , IEmployeeRepository employeeRepository
+        , ICycleRepository cycleRepository
+        , IUserRepository userRepository
+        , IStrengthRepository strengthRepository
+        , IOpportunityRepository opportunityRepository
+        , IWeaknessRepository weaknessRepository
+        , IThreatRepository threatRepository
+        , IMapper mapper)
     {
         _swotRepository = swotRepository;
         _employeeRepository = employeeRepository;
         _cycleRepository = cycleRepository;
         _userRepository = userRepository;
+        _strengthRepository = strengthRepository;
+        _opportunityRepository = opportunityRepository;
+        _weaknessRepository = weaknessRepository;
+        _threatRepository = threatRepository;
         _mapper = mapper;
     }
 
@@ -61,10 +77,24 @@ public class SwotService : ISwotService
             , x => x.CreatedBy
             , x => x.UpdatedBy
         };
-
-        // TODO: verificar se vai trazer as propriedades relacionadas.
+        
         var swot = await _swotRepository.GetAsync(x => x.EmployeeId == employeeId && x.CycleId == cycleId, includes);
-        return _mapper.Map<SwotDto>(swot);
+
+        if (swot is null)
+            throw new SwotNotFoundException();
+
+        var sthreng = await _strengthRepository.GetAllAsync(x => x.SwotId == swot.Id);
+        var opportunities = await _opportunityRepository.GetAllAsync(x => x.SwotId == swot.Id);
+        var weaknesses = await _weaknessRepository.GetAllAsync(x => x.SwotId == swot.Id);
+        var threats = await _threatRepository.GetAllAsync(x => x.SwotId == swot.Id);
+
+        var swotDto = _mapper.Map<SwotDto>(swot);
+        swotDto.Strengths = _mapper.Map<IEnumerable<StrengthDto>>(sthreng);
+        swotDto.Opportunities = _mapper.Map<IEnumerable<OpportunityDto>>(opportunities);
+        swotDto.Weaknesses = _mapper.Map<IEnumerable<WeaknessDto>>(weaknesses);
+        swotDto.Threats = _mapper.Map<IEnumerable<ThreatDto>>(threats);
+
+        return swotDto;
     }
 
     public async Task<SwotDto> UpdateAsync(long id, SwotUpdateDto entity)

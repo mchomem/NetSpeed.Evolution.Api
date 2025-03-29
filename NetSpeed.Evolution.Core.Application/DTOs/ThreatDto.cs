@@ -6,5 +6,11 @@ public class ThreatDto
     public long SwotId { get; set; }
     public string Description { get; set; }
     public int Order { get; set; }
-    public SwotDto Swot { get; set; }
+}
+
+public class ThreatInsertDto
+{
+    public long SwotId { get; set; }
+    public string Description { get; set; }
+    public int Order { get; set; }
 }
