@@ -4,6 +4,7 @@ global using NetSpeed.Evolution.Core.Application.Filters;
 global using NetSpeed.Evolution.Core.Application.Interfaces;
 global using NetSpeed.Evolution.Core.Domain.Entities;
 global using NetSpeed.Evolution.Core.Domain.Enuns;
+global using NetSpeed.Evolution.Core.Domain.Exceptions.ActionPlain5W2H;
 global using NetSpeed.Evolution.Core.Domain.Exceptions.Cycle;
 global using NetSpeed.Evolution.Core.Domain.Exceptions.Department;
 global using NetSpeed.Evolution.Core.Domain.Exceptions.Employee;

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NetSpeed.Evolution.Infrastructure.Persistence.Contexts;
 
@@ -11,9 +12,11 @@ using NetSpeed.Evolution.Infrastructure.Persistence.Contexts;
 namespace NetSpeed.Evolution.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250329064516_Add_Table_ActionPlain5W2H")]
+    partial class Add_Table_ActionPlain5W2H
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -82,9 +85,7 @@ namespace NetSpeed.Evolution.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("CycleId");
 
-                    b.HasIndex("EmployeeId", "CycleId")
-                        .IsUnique()
-                        .HasDatabaseName("UK_ActionPlain5W2H_EmployeeId_CycleId");
+                    b.HasIndex("EmployeeId");
 
                     b.ToTable("ActionPlain5W2H", (string)null);
                 });

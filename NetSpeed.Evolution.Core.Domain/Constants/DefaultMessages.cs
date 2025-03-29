@@ -33,4 +33,7 @@ public class DefaultMessages
     public const string CycleAlreadyExists = "Ciclo já existe";
     public const string CycleInactive = "Ciclo inativo";
 
+    public const string ActionPlain5W2HAlreadyExists = "Plano de ação 5W2H já existe";
+    public const string ActionPlain5W2HNotFound = "Plano de ação 5W2H não encontrado";
+
 }

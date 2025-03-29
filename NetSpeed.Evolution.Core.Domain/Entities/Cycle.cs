@@ -31,6 +31,7 @@ public class Cycle : BaseEntity
     #region Navigation Properties
 
     public ICollection<Swot> Swots { get; private set; }
+    public ICollection<ActionPlain5W2H> ActionPlains5W2H { get; private set; }
 
     #endregion
 }

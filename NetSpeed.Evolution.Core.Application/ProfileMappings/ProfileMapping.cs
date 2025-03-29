@@ -98,5 +98,13 @@ public class ProfileMapping : Profile
         CreateMap<User, UserInsertDto>().ReverseMap();
 
         #endregion
+
+        #region ActionPlain5W2H
+
+        CreateMap<ActionPlain5W2H, ActionPlain5W2HDto>().ReverseMap();
+        CreateMap<ActionPlain5W2H, ActionPlain5W2HInsertDto>().ReverseMap();
+        CreateMap<ActionPlain5W2H, DepartmentUpdateDto>().ReverseMap();
+
+        #endregion
     }
 }
