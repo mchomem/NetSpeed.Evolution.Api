@@ -30,6 +30,7 @@ public static class DependenceInjectionApi
         services.AddScoped<IWeaknessRepository, WeaknessRepository>();
         services.AddScoped<IThreatRepository, ThreatRepository>();
         services.AddScoped<IActionPlain5W2HRepository, ActionPlain5W2HRepository>();
+        services.AddScoped<IEmployeeTaskRepository, EmployeeTaskRepository>();
 
         #endregion
 
@@ -44,6 +45,7 @@ public static class DependenceInjectionApi
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<ICycleService, CycleService>();
         services.AddScoped<IActionPlain5W2HService, ActionPlain5W2HService>();
+        services.AddScoped<IEmployeeTaskService, EmployeeTaskService>();
 
         #endregion
 

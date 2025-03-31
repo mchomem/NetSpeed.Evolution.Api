@@ -1,4 +1,6 @@
-﻿namespace NetSpeed.Evolution.Core.Domain.Interfaces;
+﻿using System.Data.Common;
+
+namespace NetSpeed.Evolution.Core.Domain.Interfaces;
 
 public interface IRepositoryBase<TEntity> where TEntity : class
 {
@@ -11,4 +13,5 @@ public interface IRepositoryBase<TEntity> where TEntity : class
     public Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> filter, IEnumerable<Expression<Func<TEntity, object>>>? includes = null);
     public Task<TEntity> UpdateAsync(TEntity entity);
     public Task<bool> CheckIfExists(Expression<Func<TEntity, bool>> filter);
+    public Task<List<T>> ExecuteRawSqlAsync<T>(string sql, Func<DbDataReader, T> map, params object[] parameters);    
 }

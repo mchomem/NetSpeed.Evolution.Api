@@ -1,4 +1,6 @@
-﻿namespace NetSpeed.Evolution.Infrastructure.Persistence.Repositories;
+﻿using System.Data.Common;
+
+namespace NetSpeed.Evolution.Infrastructure.Persistence.Repositories;
 
 public class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity : class
 {
@@ -93,6 +95,33 @@ public class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity : 
             .AsNoTracking();
 
         var result = await query.AnyAsync();
+
+        return result;
+    }
+
+    public async Task<List<T>> ExecuteRawSqlAsync<T>(string sql, Func<DbDataReader, T> map, params object[] parameters)
+    {
+        await using var connection = _appDbContext.Database.GetDbConnection();
+        await connection.OpenAsync();
+
+        await using var command = connection.CreateCommand();
+        command.CommandText = sql;
+
+        // Adiciona os parâmetros à consulta
+        for (int i = 0; i < parameters.Length; i++)
+        {
+            var parameter = command.CreateParameter();
+            parameter.ParameterName = $"@p{i}";
+            parameter.Value = parameters[i] ?? DBNull.Value;
+            command.Parameters.Add(parameter);
+        }
+
+        var result = new List<T>();
+        await using var reader = await command.ExecuteReaderAsync();
+        while (await reader.ReadAsync())
+        {
+            result.Add(map(reader));
+        }
 
         return result;
     }

@@ -106,5 +106,11 @@ public class ProfileMapping : Profile
         CreateMap<ActionPlain5W2H, DepartmentUpdateDto>().ReverseMap();
 
         #endregion
+
+        #region EmployeeTaskDto
+
+        CreateMap<EmployeeTask, EmployeeTaskDto>().ReverseMap();
+
+        #endregion
     }
 }
