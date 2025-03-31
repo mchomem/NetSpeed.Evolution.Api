@@ -1,6 +1,4 @@
-﻿using System.Data.Common;
-
-namespace NetSpeed.Evolution.Infrastructure.Persistence.Repositories;
+﻿namespace NetSpeed.Evolution.Infrastructure.Persistence.Repositories;
 
 public class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity : class
 {

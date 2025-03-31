@@ -1,7 +1,4 @@
-﻿using NetSpeed.Evolution.Core.Domain.Enuns;
-using System.Text;
-
-namespace NetSpeed.Evolution.Infrastructure.Persistence.Repositories;
+﻿namespace NetSpeed.Evolution.Infrastructure.Persistence.Repositories;
 
 public class EmployeeTaskRepository : IEmployeeTaskRepository
 {

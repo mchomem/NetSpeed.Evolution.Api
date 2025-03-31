@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualBasic;
-
-namespace NetSpeed.Evolution.Core.Domain.Entities;
+﻿namespace NetSpeed.Evolution.Core.Domain.Entities;
 
 public class ActionPlain5W2H : BaseEntity
 {

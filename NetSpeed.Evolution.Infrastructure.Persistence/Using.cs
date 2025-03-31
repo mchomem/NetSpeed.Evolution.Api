@@ -4,4 +4,6 @@ global using NetSpeed.Evolution.Core.Domain.Entities;
 global using NetSpeed.Evolution.Core.Domain.Interfaces;
 global using NetSpeed.Evolution.Infrastructure.Persistence.Contexts;
 global using NetSpeed.Evolution.Infrastructure.Persistence.Mappings;
+global using System.Data.Common;
 global using System.Linq.Expressions;
+global using System.Text;

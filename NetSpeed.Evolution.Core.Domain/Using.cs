@@ -5,5 +5,6 @@ global using NetSpeed.Evolution.Core.Domain.Exceptions.Department;
 global using NetSpeed.Evolution.Core.Domain.Exceptions.HardSkill;
 global using NetSpeed.Evolution.Core.Domain.Exceptions.JobTitle;
 global using NetSpeed.Evolution.Core.Domain.Exceptions.User;
+global using System.Data.Common;
 global using System.Linq.Expressions;
 global using System.Text.RegularExpressions;

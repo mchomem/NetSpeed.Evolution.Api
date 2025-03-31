@@ -1,6 +1,4 @@
-﻿using System.Data.Common;
-
-namespace NetSpeed.Evolution.Core.Domain.Interfaces;
+﻿namespace NetSpeed.Evolution.Core.Domain.Interfaces;
 
 public interface IRepositoryBase<TEntity> where TEntity : class
 {
