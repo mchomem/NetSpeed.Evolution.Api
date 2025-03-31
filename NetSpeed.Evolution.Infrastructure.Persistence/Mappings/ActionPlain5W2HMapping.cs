@@ -82,14 +82,14 @@ public class ActionPlain5W2HMapping : IEntityTypeConfiguration<ActionPlain5W2H>
             .HasOne(ap => ap.Employee)
             .WithMany(e => e.ActionPlains5W2H)
             .HasForeignKey(ap => ap.EmployeeId)
-            .HasConstraintName("FK_ActionPlain_Employee_EmployeeId")
+            .HasConstraintName("FK_ActionPlain5W2H_Employee_EmployeeId")
             .OnDelete(DeleteBehavior.NoAction);
 
         builder
             .HasOne(ap => ap.Cycle)
             .WithMany(c => c.ActionPlains5W2H)
             .HasForeignKey(ap => ap.CycleId)
-            .HasConstraintName("FK_ActionPlain_Cycle_CycleId")
+            .HasConstraintName("FK_ActionPlain5W2H_Cycle_CycleId")
             .OnDelete(DeleteBehavior.NoAction);
 
         #endregion
