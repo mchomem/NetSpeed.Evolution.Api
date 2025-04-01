@@ -43,7 +43,7 @@ public class EmployeeService : IEmployeeService
         if (await CheckIfExists(new EmployeeFilter() { RegistrationNumber = entity.RegistrationNumber }))
             throw new EmployeeAlreadyExistsException();
 
-        var employee = new Employee(entity.Name, entity.Email, entity.RegistrationNumber, entity.ManagerId, entity.JobTitleId, entity.DepartmentId);
+        var employee = new Employee(entity.Id, entity.Name, entity.Email, entity.RegistrationNumber, entity.ManagerId, entity.JobTitleId, entity.DepartmentId);
         return _mapper.Map<EmployeeDto>(await _employeeRepository.CreateAsync(employee));
     }
 
@@ -74,6 +74,10 @@ public class EmployeeService : IEmployeeService
         };
 
         IEnumerable<Employee> employees = await _employeeRepository.GetAllAsync(expressionFilter, includes);
+
+        if(employees is null)
+            throw new EmployeeNotFoundException();
+
         return _mapper.Map<IEnumerable<EmployeeDto>>(employees);
     }
 

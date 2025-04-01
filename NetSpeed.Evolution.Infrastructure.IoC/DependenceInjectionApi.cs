@@ -22,6 +22,14 @@ public static class DependenceInjectionApi
         services.AddScoped<IHardSkillRepository, HardSkillRepository>();
         services.AddScoped<IEmployeeRepository, EmployeeRepository>();
         services.AddScoped<IEmployeeHardSkillRepository, EmployeeHardSkillRepository>();
+        services.AddScoped<ISwotRepository, SwotRepository>();
+        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<ICycleRepository, CycleRepository>();
+        services.AddScoped<IStrengthRepository, StrengthRepository>();
+        services.AddScoped<IOpportunityRepository, OpportunityRepository>();
+        services.AddScoped<IWeaknessRepository, WeaknessRepository>();
+        services.AddScoped<IThreatRepository, ThreatRepository>();
+        services.AddScoped<IActionPlain5W2HRepository, ActionPlain5W2HRepository>();
 
         #endregion
 
@@ -32,6 +40,10 @@ public static class DependenceInjectionApi
         services.AddScoped<IHardSkillService, HardSkillService>();
         services.AddScoped<IEmployeeService, EmployeeService>();
         services.AddScoped<IEmployeeHardSkillService, EmployeeHardSkillService>();
+        services.AddScoped<ISwotService, SwotService>();
+        services.AddScoped<IUserService, UserService>();
+        services.AddScoped<ICycleService, CycleService>();
+        services.AddScoped<IActionPlain5W2HService, ActionPlain5W2HService>();
 
         #endregion
 

@@ -9,11 +9,6 @@ public class EmployeeMapping : IEntityTypeConfiguration<Employee>
             .HasKey(x => x.Id);
 
         builder
-            .Property(x => x.Id)
-            .IsRequired()
-            .ValueGeneratedOnAdd();
-
-        builder
             .Property(x => x.Name)
             .HasColumnType("varchar(100)")
             .IsRequired();

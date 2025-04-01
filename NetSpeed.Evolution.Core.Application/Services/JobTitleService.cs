@@ -47,12 +47,20 @@ public class JobTitleService : IJobTitleService
             );
 
         IEnumerable<JobTitle> jobTitles = await _jobTitleRepository.GetAllAsync(expressionFilter);
+
+        if(jobTitles is null)
+            throw new JobTitleNotFoundException();
+
         return _mapper.Map<IEnumerable<JobTitleDto>>(jobTitles);
     }
 
     public async Task<JobTitleDto> GetAsync(long id)
     {
         var jobTitle = await _jobTitleRepository.GetAsync(id);
+
+        if (jobTitle is null)
+            throw new JobTitleNotFoundException();
+
         return _mapper.Map<JobTitleDto>(jobTitle);
     }
 

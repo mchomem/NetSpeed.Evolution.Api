@@ -1,6 +1,4 @@
-﻿using NetSpeed.Evolution.Api.Responses;
-
-namespace NetSpeed.Evolution.Api.Controllers;
+﻿namespace NetSpeed.Evolution.Api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -17,10 +15,6 @@ public class EmployeeHardSkillController : ControllerBase
     public async Task<IActionResult> GetAllAsync([FromQuery] EmployeeHardSkillFilter filter)
     {
         var employeeHardSkills = await _employeeHardSkillService.GetAllAsync(filter);
-
-        if (!employeeHardSkills.Any())
-            return NotFound(new ApiResponse<IEnumerable<EmployeeHardSkillDto>>(null!, DefaultMessages.EmployeeHardSkillNotFound));
-
         return Ok(new ApiResponse<IEnumerable<EmployeeHardSkillDto>>(employeeHardSkills));
     }
 
@@ -28,10 +22,6 @@ public class EmployeeHardSkillController : ControllerBase
     public async Task<IActionResult> GetAsync([FromRoute] long employeeId, [FromRoute] long hardSkillId)
     {
         var employeeHardSkill = await _employeeHardSkillService.GetAsync(employeeId, hardSkillId);
-
-        if (employeeHardSkill is null)
-            return NotFound(new ApiResponse<EmployeeHardSkillDto>(null!, DefaultMessages.EmployeeHardSkillNotFound));
-
         return Ok(new ApiResponse<EmployeeHardSkillDto>(employeeHardSkill));
     }
 

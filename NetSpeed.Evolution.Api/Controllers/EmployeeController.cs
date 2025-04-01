@@ -15,10 +15,6 @@ public class EmployeeController : ControllerBase
     public async Task<IActionResult> GetAllAsync([FromQuery] EmployeeFilter filter)
     {
         var employees = await _employeeService.GetAllAsync(filter);
-
-        if (!employees.Any())
-            return NotFound(new ApiResponse<IEnumerable<EmployeeDto>>(null!, DefaultMessages.EmployeeNotFound));
-
         return Ok(new ApiResponse<IEnumerable<EmployeeDto>>(employees));
     }
 
@@ -26,10 +22,6 @@ public class EmployeeController : ControllerBase
     public async Task<IActionResult> GetAsync([FromRoute] long id)
     {
         var employee = await _employeeService.GetAsync(id);
-
-        if (employee is null)
-            return NotFound(new ApiResponse<IEnumerable<EmployeeDto>>(null!, DefaultMessages.EmployeeNotFound));
-
         return Ok(new ApiResponse<EmployeeDto>(employee));
     }
 

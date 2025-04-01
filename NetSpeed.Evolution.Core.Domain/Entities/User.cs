@@ -17,6 +17,14 @@ public class User : BaseEntity
     public string Password { get; private set; }
     public bool Blocked { get; private set; }
 
+    #region Navigation Properties
+
+    public Employee? Employee { get; private set; }
+    public ICollection<Swot> SwotsCreatedByUser { get; private set; }
+    public ICollection<Swot> SwotsUpdatedByUser { get; private set; }
+
+    #endregion
+
     public void ChangePassword(string password)
     {
         CheckPassword(password);

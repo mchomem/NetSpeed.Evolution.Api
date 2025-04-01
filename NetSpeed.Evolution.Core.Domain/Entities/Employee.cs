@@ -4,7 +4,7 @@ public class Employee : BaseEntity
 {
     private Employee() { }
 
-    public Employee(string name, string email, string registrationNumber, long? managerId, long jobTitleId, long departmentId)
+    public Employee(long id, string name, string email, string registrationNumber, long? managerId, long jobTitleId, long departmentId)
     {
         Name = name;
         Email = email;
@@ -46,9 +46,15 @@ public class Employee : BaseEntity
 
     public Department Department { get; private set; }
 
+    public User User { get; private set; }
+
     public ICollection<Employee> Subordinates { get; private set; }
 
     public ICollection<EmployeeHardSkill> EmployeeHardSkills { get; private set; }
+
+    public ICollection<Swot> Swots { get; private set; }
+
+    public ICollection<ActionPlain5W2H> ActionPlains5W2H { get; private set; }
 
     #endregion
 }
