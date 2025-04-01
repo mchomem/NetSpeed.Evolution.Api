@@ -33,7 +33,6 @@ public class ActionPlain5W2HInsertDto
     public string How { get; set; }
     public string HowMuch { get; set; }
     public string Observation { get; set; }
-    public DateTime CreatedAt { get; set; }
 }
 
 public class ActionPlain5W2HUpdateDto
@@ -50,5 +49,4 @@ public class ActionPlain5W2HUpdateDto
     public string How { get; set; }
     public string HowMuch { get; set; }
     public string Observation { get; set; }
-    public DateTime? UpdatedAt { get; set; }
 }

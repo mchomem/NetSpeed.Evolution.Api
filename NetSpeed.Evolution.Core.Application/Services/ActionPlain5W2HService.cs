@@ -26,9 +26,6 @@ public class ActionPlain5W2HService : IActionPlain5W2HService
 
     public async Task<ActionPlain5W2HDto> CreateAsync(ActionPlain5W2HInsertDto entity)
     {
-        if (await CheckIfExists(new ActionPlain5W2HFilter() { EmployeeId = entity.EmployeeId, CycleId = entity.CycleId }))
-            throw new ActionPlain5W2HAlreadyExistsException();
-
         var employee = await _employeeRepository.GetAsync(entity.EmployeeId);
         var cycle = await _cycleRepository.GetAsync(entity.CycleId);
 
@@ -61,7 +58,7 @@ public class ActionPlain5W2HService : IActionPlain5W2HService
             x => (
                 (!filter.Id.HasValue || x.Id == filter.Id.Value)
                 && (!filter.EmployeeId.HasValue || x.EmployeeId == filter.EmployeeId.Value)
-                && (!filter.CycleId.HasValue || x.EmployeeId == filter.CycleId.Value)
+                && (!filter.CycleId.HasValue || x.CycleId == filter.CycleId.Value)
                 && (!filter.StartCreatedAt.HasValue || x.CreatedAt >= filter.StartCreatedAt.Value)
                 && (!filter.EndCreatedAt.HasValue || x.CreatedAt <= filter.EndCreatedAt.Value)
                 && (!filter.StartUpdatedAt.HasValue || x.UpdatedAt >= filter.StartUpdatedAt.Value)
