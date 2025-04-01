@@ -39,6 +39,8 @@ public class ActionPlain5W2H : BaseEntity
     public Employee Employee { get; private set; }
     public Cycle Cycle { get; private set; }
 
+    public ICollection<ActionPlain5W2HFollowUp> ActionPlain5W2HFollowUps { get; private set; }
+
     #endregion
 
     public void Update(long employeeId, string improvementPoint, string what, string who, string why, string where, string when, string how, string howMuch, string observation)
