@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.ValueGeneration;
-
-namespace NetSpeed.Evolution.Infrastructure.Persistence.Mappings;
+﻿namespace NetSpeed.Evolution.Infrastructure.Persistence.Mappings;
 
 public class ActionPlain5W2HFollowUpMapping : IEntityTypeConfiguration<ActionPlain5W2HFollowUp>
 {

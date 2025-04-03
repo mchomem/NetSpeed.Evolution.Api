@@ -1,6 +1,7 @@
 ﻿global using NetSpeed.Evolution.Core.Domain.Constants;
 global using NetSpeed.Evolution.Core.Domain.Entities;
 global using NetSpeed.Evolution.Core.Domain.Enuns;
+global using NetSpeed.Evolution.Core.Domain.Exceptions.ActionPlain5W2H;
 global using NetSpeed.Evolution.Core.Domain.Exceptions.Department;
 global using NetSpeed.Evolution.Core.Domain.Exceptions.HardSkill;
 global using NetSpeed.Evolution.Core.Domain.Exceptions.JobTitle;

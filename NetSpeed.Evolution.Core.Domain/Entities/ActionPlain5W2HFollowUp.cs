@@ -4,12 +4,11 @@ public class ActionPlain5W2HFollowUp : BaseEntity
 {
     private ActionPlain5W2HFollowUp() { }
 
-    public ActionPlain5W2HFollowUp(long actionPlain5W2HId, string annotation, DateTime createdAt, DateTime? updatedAt)
+    public ActionPlain5W2HFollowUp(long actionPlain5W2HId, string annotation)
     {
         ActionPlain5W2HId = actionPlain5W2HId;
         Annotation = annotation;
-        CreatedAt = createdAt;
-        UpdatedAt = updatedAt;
+        CreatedAt = DateTime.Now;
     }
 
     public long ActionPlain5W2HId { get; private set; }
@@ -18,6 +17,13 @@ public class ActionPlain5W2HFollowUp : BaseEntity
     public long? UpdatedById { get; private set; }
     public DateTime CreatedAt { get; private set; }
     public DateTime? UpdatedAt { get; private set; }
+
+    public void Update(long actionPlain5W2HId, string annotation)
+    {
+        ActionPlain5W2HId = actionPlain5W2HId;
+        Annotation = annotation;
+        UpdatedAt = DateTime.Now;
+    }
 
     #region Navigation Properties
 
