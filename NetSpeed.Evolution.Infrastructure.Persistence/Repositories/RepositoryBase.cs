@@ -22,7 +22,7 @@ public class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity : 
     {
         await _dbSet.AddRangeAsync(entities);
         await _appDbContext.SaveChangesAsync();
-        return  _appDbContext.Entry(entities).Entity;
+        return entities.Select(e => _appDbContext.Entry(e).Entity);
     }
 
     public async Task<TEntity> DeleteAsync(TEntity entity)
@@ -36,7 +36,7 @@ public class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity : 
     {
         _dbSet.RemoveRange(entities);
         await _appDbContext.SaveChangesAsync();
-        return _appDbContext.Entry(entities).Entity;
+        return entities.Select(e => _appDbContext.Entry(e).Entity);
     }
 
     public async Task<IEnumerable<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> filter, IEnumerable<Expression<Func<TEntity, object>>>? includes = null)

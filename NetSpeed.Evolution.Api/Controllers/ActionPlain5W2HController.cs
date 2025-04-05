@@ -32,6 +32,13 @@ public class ActionPlain5W2HController : ControllerBase
         return Ok(new ApiResponse<ActionPlain5W2HDto>(actionPlain5W2H));
     }
 
+    [HttpPost("many")]
+    public async Task<IActionResult> PostManyAsync([FromBody] IEnumerable<ActionPlain5W2HInsertDto> actionPlain5W2HDto)
+    {
+        var actionPlain5W2H = await _actionPlain5W2HService.CreateManyAsync(actionPlain5W2HDto);
+        return Ok(new ApiResponse<IEnumerable<ActionPlain5W2HDto>>(actionPlain5W2H));
+    }
+
     [HttpPut("{id}")]
     public async Task<IActionResult> PutAsync([FromRoute] long id, [FromBody] ActionPlain5W2HUpdateDto actionPlain5W2HDto)
     {

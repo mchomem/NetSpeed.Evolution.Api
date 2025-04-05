@@ -52,6 +52,40 @@ public class ActionPlain5W2HService : IActionPlain5W2HService
         return _mapper.Map<ActionPlain5W2HDto>(await _actionPlain5W2HRepository.CreateAsync(actionPlain5W2H));
     }
 
+    public async Task<IEnumerable<ActionPlain5W2HDto>> CreateManyAsync(IEnumerable<ActionPlain5W2HInsertDto> entities)
+    {
+        List<ActionPlain5W2H> actionPlain5W2HDtos = new List<ActionPlain5W2H>();
+
+        foreach (var entity in entities)
+        {
+            var employee = await _employeeRepository.GetAsync(entity.EmployeeId);
+            var cycle = await _cycleRepository.GetAsync(entity.CycleId);
+
+            if (employee is null)
+                throw new EmployeeNotFoundException();
+
+            if (cycle is null)
+                throw new CycleNotFoundException();
+
+            actionPlain5W2HDtos.Add(
+            new ActionPlain5W2H(
+                entity.EmployeeId,
+                entity.CycleId,
+                entity.ImprovementPoint,
+                entity.What,
+                entity.Who,
+                entity.Why,
+                entity.Where,
+                entity.When,
+                entity.How,
+                entity.HowMuch,
+                entity.Observation));
+        }
+
+        var manyActionPlain5W2H = await _actionPlain5W2HRepository.CreateManyAsync(actionPlain5W2HDtos);
+        return _mapper.Map<IEnumerable<ActionPlain5W2HDto>>(manyActionPlain5W2H);
+    }
+
     public async Task<IEnumerable<ActionPlain5W2HDto>> GetAllAsync(ActionPlain5W2HFilter filter)
     {
         Expression<Func<ActionPlain5W2H, bool>> expressionFilter =
