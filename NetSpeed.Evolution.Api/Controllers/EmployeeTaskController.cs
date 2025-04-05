@@ -11,10 +11,17 @@ public class EmployeeTaskController : ControllerBase
         _employeeTaskService = employeeTaskService;
     }
 
-    [HttpGet("manager")]
-    public async Task<IEnumerable<EmployeeTaskDto>> GetManagerTasks(long employeeId, long cycleId)
+    [HttpGet("employee")]
+    public async Task<IEnumerable<EmployeeTaskDto>> GetAllTasksEmployeeAsync(long employeeId, long cycleId)
     {
-        var employeeTaskServices = await _employeeTaskService.GetManagerTasks(employeeId, cycleId);
+        var employeeTaskServices = await _employeeTaskService.GetAllTasksEmployeeAsync(employeeId, cycleId);
+        return employeeTaskServices;
+    }
+
+    [HttpGet("manager")]
+    public async Task<IEnumerable<EmployeeTaskDto>> GetAllTasksManagerEmployeeAsync(long employeeId, long cycleId)
+    {
+        var employeeTaskServices = await _employeeTaskService.GetAllTasksManagerEmployeeAsync(employeeId, cycleId);
         return employeeTaskServices;
     }
 }

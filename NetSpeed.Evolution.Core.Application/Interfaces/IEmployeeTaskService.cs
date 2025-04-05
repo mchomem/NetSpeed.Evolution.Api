@@ -2,6 +2,7 @@
 {
     public interface IEmployeeTaskService
     {
-        public Task<IEnumerable<EmployeeTaskDto>> GetManagerTasks(long employeeId, long cycleId);
+        public Task<IEnumerable<EmployeeTaskDto>> GetAllTasksManagerEmployeeAsync(long employeeId, long cycleId);
+        public Task<IEnumerable<EmployeeTaskDto>> GetAllTasksEmployeeAsync(long employeeId, long cycleId);
     }
 }

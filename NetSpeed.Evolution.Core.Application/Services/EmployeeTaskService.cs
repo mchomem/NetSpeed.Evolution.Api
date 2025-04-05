@@ -11,9 +11,15 @@ public class EmployeeTaskService : IEmployeeTaskService
         _mapper = mapper;
     }
 
-    public async Task<IEnumerable<EmployeeTaskDto>> GetManagerTasks(long employeeId, long cycleId)
+    public async Task<IEnumerable<EmployeeTaskDto>> GetAllTasksEmployeeAsync(long employeeId, long cycleId)
     {
-        IEnumerable<EmployeeTask> employeeTasks = await _employeeTaskRepository.ExecuteSqlQueryAsync(employeeId, cycleId);
+        IEnumerable<EmployeeTask> employeeTasks = await _employeeTaskRepository.GetAllTasksEmployeeAsync(employeeId, cycleId);
+        return _mapper.Map<IEnumerable<EmployeeTaskDto>>(employeeTasks);
+    }
+
+    public async Task<IEnumerable<EmployeeTaskDto>> GetAllTasksManagerEmployeeAsync(long employeeId, long cycleId)
+    {
+        IEnumerable<EmployeeTask> employeeTasks = await _employeeTaskRepository.GetAllTasksManagerEmployeeAsync(employeeId, cycleId);
         return _mapper.Map<IEnumerable<EmployeeTaskDto>>(employeeTasks);
     }
 }
