@@ -1,6 +1,4 @@
-﻿using NetSpeed.Evolution.Core.Domain.Entities;
-
-namespace NetSpeed.Evolution.Core.Application.Services;
+﻿namespace NetSpeed.Evolution.Core.Application.Services;
 
 public class EmployeeHardSkillService : IEmployeeHardSkillService
 {

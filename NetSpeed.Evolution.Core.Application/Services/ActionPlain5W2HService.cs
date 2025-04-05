@@ -26,9 +26,6 @@ public class ActionPlain5W2HService : IActionPlain5W2HService
 
     public async Task<ActionPlain5W2HDto> CreateAsync(ActionPlain5W2HInsertDto entity)
     {
-        if (await CheckIfExists(new ActionPlain5W2HFilter() { EmployeeId = entity.EmployeeId, CycleId = entity.CycleId }))
-            throw new ActionPlain5W2HAlreadyExistsException();
-
         var employee = await _employeeRepository.GetAsync(entity.EmployeeId);
         var cycle = await _cycleRepository.GetAsync(entity.CycleId);
 
@@ -55,13 +52,47 @@ public class ActionPlain5W2HService : IActionPlain5W2HService
         return _mapper.Map<ActionPlain5W2HDto>(await _actionPlain5W2HRepository.CreateAsync(actionPlain5W2H));
     }
 
+    public async Task<IEnumerable<ActionPlain5W2HDto>> CreateManyAsync(IEnumerable<ActionPlain5W2HInsertDto> entities)
+    {
+        List<ActionPlain5W2H> actionPlain5W2HDtos = new List<ActionPlain5W2H>();
+
+        foreach (var entity in entities)
+        {
+            var employee = await _employeeRepository.GetAsync(entity.EmployeeId);
+            var cycle = await _cycleRepository.GetAsync(entity.CycleId);
+
+            if (employee is null)
+                throw new EmployeeNotFoundException();
+
+            if (cycle is null)
+                throw new CycleNotFoundException();
+
+            actionPlain5W2HDtos.Add(
+            new ActionPlain5W2H(
+                entity.EmployeeId,
+                entity.CycleId,
+                entity.ImprovementPoint,
+                entity.What,
+                entity.Who,
+                entity.Why,
+                entity.Where,
+                entity.When,
+                entity.How,
+                entity.HowMuch,
+                entity.Observation));
+        }
+
+        var manyActionPlain5W2H = await _actionPlain5W2HRepository.CreateManyAsync(actionPlain5W2HDtos);
+        return _mapper.Map<IEnumerable<ActionPlain5W2HDto>>(manyActionPlain5W2H);
+    }
+
     public async Task<IEnumerable<ActionPlain5W2HDto>> GetAllAsync(ActionPlain5W2HFilter filter)
     {
         Expression<Func<ActionPlain5W2H, bool>> expressionFilter =
             x => (
                 (!filter.Id.HasValue || x.Id == filter.Id.Value)
                 && (!filter.EmployeeId.HasValue || x.EmployeeId == filter.EmployeeId.Value)
-                && (!filter.CycleId.HasValue || x.EmployeeId == filter.CycleId.Value)
+                && (!filter.CycleId.HasValue || x.CycleId == filter.CycleId.Value)
                 && (!filter.StartCreatedAt.HasValue || x.CreatedAt >= filter.StartCreatedAt.Value)
                 && (!filter.EndCreatedAt.HasValue || x.CreatedAt <= filter.EndCreatedAt.Value)
                 && (!filter.StartUpdatedAt.HasValue || x.UpdatedAt >= filter.StartUpdatedAt.Value)

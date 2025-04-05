@@ -21,6 +21,12 @@ public class ActionPlain5W2HRepository : IActionPlain5W2HRepository
         return actionPlain5W2H;
     }
 
+    public async Task<IEnumerable<ActionPlain5W2H>> CreateManyAsync(IEnumerable<ActionPlain5W2H> entities)
+    {
+        var actionPlains5W2H = await _repositoryBase.CreateManyAsync(entities);
+        return actionPlains5W2H;
+    }
+
     public async Task<IEnumerable<ActionPlain5W2H>> GetAllAsync(Expression<Func<ActionPlain5W2H, bool>> filter, IEnumerable<Expression<Func<ActionPlain5W2H, object>>>? includes = null)
     {
         var actionPlains5W2H = await _repositoryBase.GetAllAsync(filter, includes);

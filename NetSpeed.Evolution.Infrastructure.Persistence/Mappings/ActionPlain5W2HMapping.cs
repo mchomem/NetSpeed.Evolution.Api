@@ -71,11 +71,6 @@ public class ActionPlain5W2HMapping : IEntityTypeConfiguration<ActionPlain5W2H>
             .HasColumnType("datetime")
             .IsRequired(false);
 
-        builder
-            .HasIndex(x => new { x.EmployeeId, x.CycleId })
-            .IsUnique()
-            .HasDatabaseName("UK_ActionPlain5W2H_EmployeeId_CycleId");
-
         #region Foreign key to table.
 
         builder

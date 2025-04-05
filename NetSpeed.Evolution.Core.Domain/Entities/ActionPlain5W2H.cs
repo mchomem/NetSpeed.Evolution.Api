@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualBasic;
-
-namespace NetSpeed.Evolution.Core.Domain.Entities;
+﻿namespace NetSpeed.Evolution.Core.Domain.Entities;
 
 public class ActionPlain5W2H : BaseEntity
 {
@@ -40,6 +38,8 @@ public class ActionPlain5W2H : BaseEntity
 
     public Employee Employee { get; private set; }
     public Cycle Cycle { get; private set; }
+
+    public ICollection<ActionPlain5W2HFollowUp> ActionPlain5W2HFollowUps { get; private set; }
 
     #endregion
 

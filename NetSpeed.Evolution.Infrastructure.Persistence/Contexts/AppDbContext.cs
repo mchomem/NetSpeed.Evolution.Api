@@ -14,7 +14,8 @@ public class AppDbContext : DbContext
     public DbSet<Threat> Threat { get; set; }
     public DbSet<User> User { get; set; }
     public DbSet<Cycle> Cycle { get; set; }
-    public DbSet<ActionPlain5W2H> ActionPlain { get; set; }
+    public DbSet<ActionPlain5W2H> ActionPlain5W2H { get; set; }
+    public DbSet<ActionPlain5W2HFollowUp> ActionPlain5W2HFollowUp { get; set; }
 
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 

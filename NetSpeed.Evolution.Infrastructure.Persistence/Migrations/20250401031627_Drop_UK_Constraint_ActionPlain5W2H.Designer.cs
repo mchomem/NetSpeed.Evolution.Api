@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NetSpeed.Evolution.Infrastructure.Persistence.Contexts;
 
@@ -11,9 +12,11 @@ using NetSpeed.Evolution.Infrastructure.Persistence.Contexts;
 namespace NetSpeed.Evolution.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250401031627_Drop_UK_Constraint_ActionPlain5W2H")]
+    partial class Drop_UK_Constraint_ActionPlain5W2H
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -85,44 +88,6 @@ namespace NetSpeed.Evolution.Infrastructure.Persistence.Migrations
                     b.HasIndex("EmployeeId");
 
                     b.ToTable("ActionPlain5W2H", (string)null);
-                });
-
-            modelBuilder.Entity("NetSpeed.Evolution.Core.Domain.Entities.ActionPlain5W2HFollowUp", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
-
-                    b.Property<long>("ActionPlain5W2HId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Annotation")
-                        .IsRequired()
-                        .HasColumnType("varchar(1000)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime");
-
-                    b.Property<long>("CreatedById")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime");
-
-                    b.Property<long?>("UpdatedById")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ActionPlain5W2HId");
-
-                    b.HasIndex("CreatedById");
-
-                    b.HasIndex("UpdatedById");
-
-                    b.ToTable("ActionPlain5W2HFollowUp", (string)null);
                 });
 
             modelBuilder.Entity("NetSpeed.Evolution.Core.Domain.Entities.Cycle", b =>
@@ -497,35 +462,6 @@ namespace NetSpeed.Evolution.Infrastructure.Persistence.Migrations
                     b.Navigation("Employee");
                 });
 
-            modelBuilder.Entity("NetSpeed.Evolution.Core.Domain.Entities.ActionPlain5W2HFollowUp", b =>
-                {
-                    b.HasOne("NetSpeed.Evolution.Core.Domain.Entities.ActionPlain5W2H", "ActionPlain5W2H")
-                        .WithMany("ActionPlain5W2HFollowUps")
-                        .HasForeignKey("ActionPlain5W2HId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired()
-                        .HasConstraintName("FK_ActionPlain5W2HFollowUp_ActionPlain5W2H_ActionPlain5W2HId");
-
-                    b.HasOne("NetSpeed.Evolution.Core.Domain.Entities.User", "CreatedBy")
-                        .WithMany("ActionPlain5W2HFollowUpCreatedByUser")
-                        .HasForeignKey("CreatedById")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired()
-                        .HasConstraintName("FK_ActionPlain5W2HFollowUp_User_CreatedById");
-
-                    b.HasOne("NetSpeed.Evolution.Core.Domain.Entities.User", "UpdatedBy")
-                        .WithMany("ActionPlain5W2HFollowUpUpdatedByUser")
-                        .HasForeignKey("UpdatedById")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .HasConstraintName("FK_ActionPlain5W2HFollowUp_User_UpdatedById");
-
-                    b.Navigation("ActionPlain5W2H");
-
-                    b.Navigation("CreatedBy");
-
-                    b.Navigation("UpdatedBy");
-                });
-
             modelBuilder.Entity("NetSpeed.Evolution.Core.Domain.Entities.Employee", b =>
                 {
                     b.HasOne("NetSpeed.Evolution.Core.Domain.Entities.Department", "Department")
@@ -671,11 +607,6 @@ namespace NetSpeed.Evolution.Infrastructure.Persistence.Migrations
                     b.Navigation("Swot");
                 });
 
-            modelBuilder.Entity("NetSpeed.Evolution.Core.Domain.Entities.ActionPlain5W2H", b =>
-                {
-                    b.Navigation("ActionPlain5W2HFollowUps");
-                });
-
             modelBuilder.Entity("NetSpeed.Evolution.Core.Domain.Entities.Cycle", b =>
                 {
                     b.Navigation("ActionPlains5W2H");
@@ -722,10 +653,6 @@ namespace NetSpeed.Evolution.Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("NetSpeed.Evolution.Core.Domain.Entities.User", b =>
                 {
-                    b.Navigation("ActionPlain5W2HFollowUpCreatedByUser");
-
-                    b.Navigation("ActionPlain5W2HFollowUpUpdatedByUser");
-
                     b.Navigation("Employee");
 
                     b.Navigation("SwotsCreatedByUser");
