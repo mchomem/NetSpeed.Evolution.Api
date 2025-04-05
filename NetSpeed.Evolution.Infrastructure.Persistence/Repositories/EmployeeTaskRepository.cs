@@ -3,7 +3,7 @@
 public class EmployeeTaskRepository : IEmployeeTaskRepository
 {
     private readonly IRepositoryBase<EmployeeTask> _repositoryBase;
-
+     
     public EmployeeTaskRepository(IRepositoryBase<EmployeeTask> repositoryBase)
     {
         _repositoryBase = repositoryBase;
@@ -14,8 +14,8 @@ public class EmployeeTaskRepository : IEmployeeTaskRepository
         StringBuilder sql = new StringBuilder();
         sql.AppendLine("select");
         sql.AppendLine(" Id [EmployeeId]");
-        sql.AppendLine(", (select top 1 id from Cycle where Active = @p1) [CycleId]");
-        sql.AppendLine(", 'Disponibiizar o SWOT ' + cast(year(getdate()) as varchar) + ' para o colaborador(a) ' + e.Name + ' - Matrícula: ' + e.RegistrationNumber [TaskDescrption]");
+        sql.AppendLine(", (select top 1 id from Cycle where Active = 1) [CycleId]");
+        sql.AppendLine(", 'Disponibiizar o SWOT ' + cast( (select top 1 Year from Cycle where Active = 1) as varchar) + ' para o colaborador(a) ' + e.Name + ' - Matrícula: ' + e.RegistrationNumber [TaskDescrption]");
         sql.AppendLine(", 'SWOT' [EmployeeTaskType]");
         sql.AppendLine(" from");
         sql.AppendLine(" Employee e");
