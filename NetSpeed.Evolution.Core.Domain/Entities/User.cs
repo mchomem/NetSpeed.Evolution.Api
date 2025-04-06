@@ -22,6 +22,8 @@ public class User : BaseEntity
     public Employee? Employee { get; private set; }
     public ICollection<Swot> SwotsCreatedByUser { get; private set; }
     public ICollection<Swot> SwotsUpdatedByUser { get; private set; }
+    public ICollection<ActionPlain5W2HFollowUp> ActionPlain5W2HFollowUpCreatedByUser { get; private set; }
+    public ICollection<ActionPlain5W2HFollowUp> ActionPlain5W2HFollowUpUpdatedByUser { get; private set; }
 
     #endregion
 

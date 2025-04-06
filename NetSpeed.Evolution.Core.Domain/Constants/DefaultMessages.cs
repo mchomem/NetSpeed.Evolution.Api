@@ -36,4 +36,6 @@ public class DefaultMessages
     public const string ActionPlain5W2HAlreadyExists = "Plano de ação 5W2H já existe";
     public const string ActionPlain5W2HNotFound = "Plano de ação 5W2H não encontrado";
 
+    public const string ActionPlain5W2HFollowUpAlreadyExists = "Acompanhamento de plano de ação 5W2H já existe";
+    public const string ActionPlain5W2HFollowUpNotFound = "Acompanhamento de plano de ação 5W2H não encontrado";
 }

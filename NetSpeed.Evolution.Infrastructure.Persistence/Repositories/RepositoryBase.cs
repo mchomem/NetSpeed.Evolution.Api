@@ -22,7 +22,7 @@ public class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity : 
     {
         await _dbSet.AddRangeAsync(entities);
         await _appDbContext.SaveChangesAsync();
-        return  _appDbContext.Entry(entities).Entity;
+        return entities.Select(e => _appDbContext.Entry(e).Entity);
     }
 
     public async Task<TEntity> DeleteAsync(TEntity entity)
@@ -36,7 +36,7 @@ public class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity : 
     {
         _dbSet.RemoveRange(entities);
         await _appDbContext.SaveChangesAsync();
-        return _appDbContext.Entry(entities).Entity;
+        return entities.Select(e => _appDbContext.Entry(e).Entity);
     }
 
     public async Task<IEnumerable<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> filter, IEnumerable<Expression<Func<TEntity, object>>>? includes = null)
@@ -93,6 +93,33 @@ public class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity : 
             .AsNoTracking();
 
         var result = await query.AnyAsync();
+
+        return result;
+    }
+
+    public async Task<List<T>> ExecuteRawSqlAsync<T>(string sql, Func<DbDataReader, T> map, params object[] parameters)
+    {
+        await using var connection = _appDbContext.Database.GetDbConnection();
+        await connection.OpenAsync();
+
+        await using var command = connection.CreateCommand();
+        command.CommandText = sql;
+
+        // Adiciona os parâmetros à consulta
+        for (int i = 0; i < parameters.Length; i++)
+        {
+            var parameter = command.CreateParameter();
+            parameter.ParameterName = $"@p{i}";
+            parameter.Value = parameters[i] ?? DBNull.Value;
+            command.Parameters.Add(parameter);
+        }
+
+        var result = new List<T>();
+        await using var reader = await command.ExecuteReaderAsync();
+        while (await reader.ReadAsync())
+        {
+            result.Add(map(reader));
+        }
 
         return result;
     }
