@@ -1,6 +1,8 @@
-﻿global using Microsoft.EntityFrameworkCore;
+﻿global using Microsoft.AspNetCore.Authentication.JwtBearer;
+global using Microsoft.EntityFrameworkCore;
 global using Microsoft.Extensions.Configuration;
 global using Microsoft.Extensions.DependencyInjection;
+global using Microsoft.IdentityModel.Tokens;
 global using Microsoft.OpenApi.Models;
 global using NetSpeed.Evolution.Core.Application.Interfaces;
 global using NetSpeed.Evolution.Core.Application.ProfileMappings;
@@ -9,3 +11,5 @@ global using NetSpeed.Evolution.Core.Domain.Interfaces;
 global using NetSpeed.Evolution.Infrastructure.Persistence.Contexts;
 global using NetSpeed.Evolution.Infrastructure.Persistence.Repositories;
 global using System.Reflection;
+global using System.Text;
+
