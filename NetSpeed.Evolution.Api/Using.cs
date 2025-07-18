@@ -1,4 +1,5 @@
-﻿global using Microsoft.AspNetCore.Mvc;
+﻿global using Microsoft.AspNetCore.Authorization;
+global using Microsoft.AspNetCore.Mvc;
 global using NetSpeed.Evolution.Api.Middlewares;
 global using NetSpeed.Evolution.Api.Responses;
 global using NetSpeed.Evolution.Core.Application.DTOs;

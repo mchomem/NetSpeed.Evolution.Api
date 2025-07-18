@@ -3,11 +3,13 @@
 public class UserService : IUserService
 {
     private readonly IUserRepository _userRepository;
+    private readonly ICypherService _cypherService;
     private readonly IMapper _mapper;
 
-    public UserService(IUserRepository userRepository, IMapper mapper)
+    public UserService(IUserRepository userRepository, ICypherService cypherService, IMapper mapper)
     {
         _userRepository = userRepository;
+        _cypherService = cypherService;
         _mapper = mapper;
     }
 
@@ -33,7 +35,7 @@ public class UserService : IUserService
 
     public async Task<UserDto> CreateAsync(UserInsertDto entity)
     {
-        if(await CheckIfExists(new UserFilter() { Login = entity.Login}))
+        if (await CheckIfExists(new UserFilter() { Login = entity.Login }))
             throw new UserAlreadyExistsException();
 
         var user = new User(entity.Login, entity.Password);
@@ -77,8 +79,26 @@ public class UserService : IUserService
         {
             x => x.Employee
         };
-;
+        
         var user = await _userRepository.GetAsync(x => x.Login.Equals(filter.Login), includes);
+
+        return _mapper.Map<UserDto>(user);
+    }
+
+    public async Task<UserDto> GetAuthenticateAsync(string login, string password)
+    {
+        User user = await _userRepository.GetAsync(x => x.Login == login);
+        string cypheredPassword = _cypherService.Encrypt(password);
+        int maxInvalidPasswordCount = 3;
+
+        if (user is null)
+            throw new UserAccessDeniedException();
+
+        if (user.Password != cypheredPassword)
+            throw new UserAccessDeniedException();
+
+        if (user.Blocked)
+            throw new UserBlockedException();
 
         return _mapper.Map<UserDto>(user);
     }

@@ -1,4 +1,5 @@
 ﻿global using AutoMapper;
+global using Microsoft.IdentityModel.Tokens;
 global using NetSpeed.Evolution.Core.Application.DTOs;
 global using NetSpeed.Evolution.Core.Application.Filters;
 global using NetSpeed.Evolution.Core.Application.Interfaces;
@@ -15,4 +16,8 @@ global using NetSpeed.Evolution.Core.Domain.Exceptions.JobTitle;
 global using NetSpeed.Evolution.Core.Domain.Exceptions.Swot;
 global using NetSpeed.Evolution.Core.Domain.Exceptions.User;
 global using NetSpeed.Evolution.Core.Domain.Interfaces;
+global using System.IdentityModel.Tokens.Jwt;
 global using System.Linq.Expressions;
+global using System.Security.Claims;
+global using System.Security.Cryptography;
+global using System.Text;

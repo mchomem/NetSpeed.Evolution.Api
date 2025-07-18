@@ -8,4 +8,5 @@ public interface IUserService
     public Task<UserDto> GetAsync(UserFilter filter);
     public Task<IEnumerable<UserDto>> GetAllAsync(UserFilter filter);
     public Task<UserDto> BlockAsync(long id);
+    public Task<UserDto> GetAuthenticateAsync(string login, string password);
 }

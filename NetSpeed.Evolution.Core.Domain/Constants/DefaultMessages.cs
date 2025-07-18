@@ -4,6 +4,8 @@ public class DefaultMessages
 {
     public const string UserNotFound = "Usuário não encontrado";
     public const string UserAlreadyExists = "Login de usuário já existe";
+    public const string UserAccessDenied = "Acesso negado para o usuário informado";
+    public const string UserBlocked = "Usuário bloqueado";
     public const string UserPasswordInsufficientLength = "Senha do usuário com tamanho insuficiente";
     public const string UserPasswordWithoutLetters = "A senha precisa conter letras";
     public const string UserPasswordWithoutNumbers = "A senha precisa conter números";
