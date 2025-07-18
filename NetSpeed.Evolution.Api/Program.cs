@@ -12,6 +12,22 @@ builder.Services.
         options.JsonSerializerOptions.WriteIndented = true;
     });
 
+string angularPolicyName = "AllowAngularFrontEnd";
+
+if (builder.Environment.IsDevelopment())
+{
+    builder.Services.AddCors(options =>
+    {
+        options.AddPolicy(angularPolicyName, policy =>
+        {
+            policy.WithOrigins("http://localhost:4200")
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials(); //TO DO: Verificar se esse cara será necessário para a autenticação
+        });
+    });
+}
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -23,6 +39,8 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
+    app.UseCors(angularPolicyName);
 }
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();

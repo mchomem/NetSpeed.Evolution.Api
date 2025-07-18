@@ -25,7 +25,7 @@ public class SwotController : ControllerBase
         return Ok(new ApiResponse<SwotDto>(swot));
     }
 
-    [HttpPut]
+    [HttpPut]   
     public async Task<IActionResult> PutAsync(long id, [FromBody] SwotUpdateDto swotDto)
     {
         var swot = await _swotService.UpdateAsync(id, swotDto);

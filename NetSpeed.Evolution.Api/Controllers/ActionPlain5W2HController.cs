@@ -45,4 +45,11 @@ public class ActionPlain5W2HController : ControllerBase
         var actionPlain5W2H = await _actionPlain5W2HService.UpdateAsync(id, actionPlain5W2HDto);
         return Ok(new ApiResponse<ActionPlain5W2HDto>(actionPlain5W2H));
     }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteAsync([FromRoute] long id)
+    {
+        var actionPlain5W2H = await _actionPlain5W2HService.DeleteAsync(id);
+        return Ok(new ApiResponse<ActionPlain5W2HDto>(actionPlain5W2H));
+    }
 }

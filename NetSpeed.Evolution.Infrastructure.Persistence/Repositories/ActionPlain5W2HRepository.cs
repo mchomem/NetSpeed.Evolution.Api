@@ -50,4 +50,10 @@ public class ActionPlain5W2HRepository : IActionPlain5W2HRepository
         var actionPlain5W2H = await _repositoryBase.UpdateAsync(entity);
         return actionPlain5W2H;
     }
+
+    public async Task<ActionPlain5W2H> DeleteAsync(ActionPlain5W2H entity)
+    {
+        var actionPlain5W2H = await _repositoryBase.DeleteAsync(entity);
+        return actionPlain5W2H;
+    }
 }
