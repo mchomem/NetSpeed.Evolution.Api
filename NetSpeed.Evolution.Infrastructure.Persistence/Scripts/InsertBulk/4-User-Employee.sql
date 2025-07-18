@@ -127,7 +127,7 @@ begin
 	end
 
 	declare @login varchar(30) = lower(@firstName) + '.' + lower(@lastName) + concat('_', floor(rand() * 10), floor(rand() * 10))
-	declare @password varchar(100) = 'user@netspeed'
+	declare @password varchar(100) = 'j9EIDhW+RziEroUNz/0bLw==' -- netspeed
 
 	-- Verifica se já existe o login de usuário.
 	if exists(select * from [User] where [Login] = @login)

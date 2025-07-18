@@ -48,6 +48,8 @@ public static class DependenceInjectionApi
         services.AddScoped<IActionPlain5W2HService, ActionPlain5W2HService>();
         services.AddScoped<IEmployeeTaskService, EmployeeTaskService>();
         services.AddScoped<IActionPlain5W2HFollowUpService, ActionPlain5W2HFollowUpService>();
+        services.AddScoped<ITokenService, TokenService>();
+        services.AddScoped<ICypherService, CypherService>();
 
         #endregion
 
