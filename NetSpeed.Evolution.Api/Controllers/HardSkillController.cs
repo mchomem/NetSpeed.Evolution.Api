@@ -2,6 +2,7 @@
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize]
 public class HardSkillController : ControllerBase
 {
     private readonly IHardSkillService _hardSkillService;

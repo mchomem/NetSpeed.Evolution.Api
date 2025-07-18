@@ -2,6 +2,7 @@
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize]
 public class ActionPlain5W2HFollowUpController : ControllerBase
 {
     private readonly IActionPlain5W2HFollowUpService _actionPlain5W2HFollowUpService;

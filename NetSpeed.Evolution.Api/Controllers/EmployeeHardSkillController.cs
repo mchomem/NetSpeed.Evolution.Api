@@ -2,6 +2,7 @@
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize]
 public class EmployeeHardSkillController : ControllerBase
 {
     private readonly IEmployeeHardSkillService _employeeHardSkillService;
