@@ -2,6 +2,7 @@
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize]
 public class EmployeeTaskController : ControllerBase
 {
     private readonly IEmployeeTaskService _employeeTaskService;

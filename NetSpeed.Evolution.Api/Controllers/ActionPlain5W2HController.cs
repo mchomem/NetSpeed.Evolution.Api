@@ -2,6 +2,7 @@
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize]
 public class ActionPlain5W2HController : ControllerBase
 {
     private readonly IActionPlain5W2HService _actionPlain5W2HService;

@@ -2,6 +2,7 @@
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize]
 public class SwotController : ControllerBase
 {
     private readonly ISwotService _swotService;
