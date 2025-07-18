@@ -9,4 +9,5 @@ public interface IActionPlain5W2HRepository
     public Task<IEnumerable<ActionPlain5W2H>> GetAllAsync(Expression<Func<ActionPlain5W2H, bool>> filter, IEnumerable<Expression<Func<ActionPlain5W2H, object>>>? includes = null);
     public Task<ActionPlain5W2H> UpdateAsync(ActionPlain5W2H entity);
     public Task<bool> CheckIfExists(Expression<Func<ActionPlain5W2H, bool>> filter);
+    public Task<ActionPlain5W2H> DeleteAsync(ActionPlain5W2H entity);
 }

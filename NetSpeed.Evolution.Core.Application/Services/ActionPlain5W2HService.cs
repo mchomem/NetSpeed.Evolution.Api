@@ -1,4 +1,6 @@
-﻿namespace NetSpeed.Evolution.Core.Application.Services;
+﻿using NetSpeed.Evolution.Core.Domain.Interfaces;
+
+namespace NetSpeed.Evolution.Core.Application.Services;
 
 public class ActionPlain5W2HService : IActionPlain5W2HService
 {
@@ -157,5 +159,15 @@ public class ActionPlain5W2HService : IActionPlain5W2HService
         var updatedActionPLain5W2H = await _actionPlain5W2HRepository.UpdateAsync(actionPlain5W2H);
 
         return _mapper.Map<ActionPlain5W2HDto>(updatedActionPLain5W2H);
+    }
+
+    public async Task<ActionPlain5W2HDto> DeleteAsync(long id)
+    {
+        var actionPlain5W2H = await _actionPlain5W2HRepository.GetAsync(id);
+
+        if (actionPlain5W2H is null)
+            throw new ActionPlain5W2HNotFoundException();
+
+        return _mapper.Map<ActionPlain5W2HDto>(await _actionPlain5W2HRepository.DeleteAsync(actionPlain5W2H));
     }
 }

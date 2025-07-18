@@ -8,4 +8,5 @@ public interface IActionPlain5W2HService
     public Task<ActionPlain5W2HDto> GetAsync(long id);
     public Task<IEnumerable<ActionPlain5W2HDto>> GetAllAsync(ActionPlain5W2HFilter filter);
     public Task<ActionPlain5W2HDto> UpdateAsync(long id, ActionPlain5W2HUpdateDto entity);
+    public Task<ActionPlain5W2HDto> DeleteAsync(long id);
 }
